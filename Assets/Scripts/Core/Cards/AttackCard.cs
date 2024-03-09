@@ -2,12 +2,10 @@
 {
     public class AttackCard : Card
     {
-        public int Damage { get; private set; }
         public CardEffect Effect { get; private set; }
 
-        public AttackCard(string name, string description, int cost, int damage, CardEffect effect) : base(name, description, cost)
+        public AttackCard(string name, string description, int cost, CardEffect effect) : base(name, description, cost)
         {
-            Damage = damage;
             Effect = effect;
         }
 

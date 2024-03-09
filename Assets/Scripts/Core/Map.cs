@@ -1,7 +1,15 @@
 ﻿namespace Core
 {
-    public abstract class Map
+    public class Map
     {
+        protected int width;
+        protected int height;
+
+        public Map(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+        }
     }
 
     public interface IMapGenerator

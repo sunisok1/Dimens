@@ -1,6 +1,6 @@
 ﻿namespace Core
 {
-    public abstract class Equipment
+    public class Equipment
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Core.TurnSystem
+﻿namespace Core.System
 {
     public class StateMachine
     {

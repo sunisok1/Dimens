@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.TurnSystem
+namespace Core.System
 {
-    public class EventManager
+    public class EventSystem
     {
         private readonly Dictionary<Type, Delegate> eventHandlers = new();
 

@@ -1,3 +1,5 @@
+using Core.Entities;
+using Core.System;
 using UnityEngine;
 
 namespace Core
@@ -5,12 +7,11 @@ namespace Core
     public class GameManager : MonoBehaviour
     {
         private Map gameMap;
-        private IMapGenerator mapGenerator;
+        private TurnSystem turnSystem;
 
         private void Start()
         {
             InitializeGame();
-            mapGenerator = GetComponent<IMapGenerator>();
         }
 
         private void InitializeGame()
@@ -21,13 +22,21 @@ namespace Core
 
         private void InitializeMap()
         {
+            var mapGenerator = GetComponent<IMapGenerator>();
             gameMap = mapGenerator.GenerateMap();
             Debug.Log("Map Initialized");
         }
 
         private void InitializeTurnSystem()
         {
-            // 这里设置回合系统的初始状态
+            Player[] players = new Player[9];
+            for (var i = 0; i < players.Length; i++)
+            {
+                players[i] = new Player($"player_{i}", 100, 100);
+            }
+
+            turnSystem = GetComponent<TurnSystem>();
+            turnSystem.Initialize(players);
             Debug.Log("Round System Initialized");
         }
     }

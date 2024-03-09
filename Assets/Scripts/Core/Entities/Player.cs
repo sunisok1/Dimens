@@ -1,11 +1,58 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Core.Cards;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core.Entities
 {
+    public class Deck
+    {
+        private readonly List<Card> cards = new();
+
+        public Deck()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                cards.Add(new AttackCard("strike", "strike", 1, null));
+                cards.Add(new EffectCard("strike", "strike", 1, null));
+                cards.Add(new EquipmentCard("strike", "strike", new ()));
+            }
+
+            Shuffle();
+        }
+
+        public void Shuffle()
+        {
+            for (var i = 0; i < cards.Count; i++)
+            {
+                var x = Random.Range(i, cards.Count);
+                (cards[i], cards[x]) = (cards[x], cards[i]);
+            }
+        }
+
+        public IEnumerable<Card> Draw(int num)
+        {
+            List<Card> list = new();
+
+            int actualNum = Math.Min(num, cards.Count);
+
+            for (int i = 0; i < actualNum; i++)
+            {
+                Card card = cards[^1];
+                cards.RemoveAt(cards.Count - 1);
+                list.Add(card);
+            }
+
+            return list;
+        }
+    }
+
     public class Player : Entity
     {
-        private List<Card> cards;
+        private readonly Deck deck = new();
+        private readonly List<Card> handCards = new();
         public int Health { get; private set; }
         public int MaxHealth { get; private set; }
 
@@ -36,6 +83,20 @@ namespace Core.Entities
         public void Equip(Equipment equipment)
         {
             throw new NotImplementedException();
+        }
+
+        public void Draw(int num = 1)
+        {
+            handCards.AddRange(deck.Draw(num));
+        }
+
+        public IEnumerator Play()
+        {
+            yield return new WaitForSeconds(2f);
+        }
+
+        public void EndTurn()
+        {
         }
     }
 }

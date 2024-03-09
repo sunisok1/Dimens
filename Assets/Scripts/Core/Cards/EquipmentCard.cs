@@ -4,19 +4,15 @@ namespace Core.Cards
 {
     public class EquipmentCard : Card
     {
-        private readonly Equipment equipment;
+        public Equipment equipment { get; }
 
-        public EquipmentCard(string name, string description, int cost, Equipment equipment) : base(name, description, cost)
+        public EquipmentCard(string name, string description, Equipment equipment) : base(name, description, 0)
         {
             this.equipment = equipment;
         }
 
         public override void ExecuteEffect(CardEffectArgs args)
         {
-            if (args.target is Player player)
-            {
-                player.Equip(equipment);
-            }
         }
     }
 }
