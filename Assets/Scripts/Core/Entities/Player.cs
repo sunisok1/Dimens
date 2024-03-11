@@ -17,7 +17,7 @@ namespace Core.Entities
             {
                 cards.Add(new AttackCard("strike", "strike", 1, null));
                 cards.Add(new EffectCard("strike", "strike", 1, null));
-                cards.Add(new EquipmentCard("strike", "strike", new ()));
+                cards.Add(new EquipmentCard("strike", "strike", new()));
             }
 
             Shuffle();
@@ -56,9 +56,12 @@ namespace Core.Entities
         public int Health { get; private set; }
         public int MaxHealth { get; private set; }
 
-        public Player(string name, int health, int maxHealth) : base(name)
+        public Vector3Int Position { get; private set; }
+
+        public Player(string name, int health, int maxHealth, Vector3Int position) : base(name)
         {
             MaxHealth = maxHealth;
+            Position = position;
             Health = health > maxHealth ? maxHealth : health;
         }
 
@@ -97,6 +100,24 @@ namespace Core.Entities
 
         public void EndTurn()
         {
+        }
+
+        public void MoveTo(Vector3Int target)
+        {
+            EventSystem.InvokeEvent(this, new PlayerMoveArgs(Position, target));
+            Position = target;
+        }
+    }
+
+    public class PlayerMoveArgs : EventArgs
+    {
+        public Vector3Int origin { get; }
+        public Vector3Int target { get; }
+
+        public PlayerMoveArgs(Vector3Int origin, Vector3Int target)
+        {
+            this.origin = origin;
+            this.target = target;
         }
     }
 }

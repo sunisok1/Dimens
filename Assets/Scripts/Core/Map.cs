@@ -1,19 +1,27 @@
-﻿namespace Core
+﻿using UnityEngine;
+
+namespace Core
 {
-    public class Map
-    {
-        protected int width;
-        protected int height;
-
-        public Map(int width, int height)
-        {
-            this.width = width;
-            this.height = height;
-        }
-    }
-
     public interface IMapGenerator
     {
         Map GenerateMap();
+    }
+
+    public abstract class Map
+    {
+        public int Width { get; }
+        public int Height { get; }
+
+        protected Map(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
+
+        public abstract Vector3 GetWorldPosition(Vector3Int position);
+        public abstract Transform PlayerContent { get; }
+        public abstract bool GetUnoccupiedPosition(out Vector3Int position);
+        public abstract void MarkPositionOccupied(Vector3Int position);
+        public abstract void MarkPositionUnoccupied(Vector3Int position);
     }
 }

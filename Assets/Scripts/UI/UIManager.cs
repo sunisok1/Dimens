@@ -2,13 +2,28 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace UI
 {
     public static class UIManager
     {
+        private static readonly Canvas canvas;
+
         private static readonly Dictionary<Type, BaseUI> uiDictionary = new();
+
+        static UIManager()
+        {
+            GameObject gameObject = GameObject.Find("Canvas");
+            if (gameObject == null)
+            {
+                gameObject = new GameObject("Canvas");
+                canvas = gameObject.AddComponent<Canvas>();
+            }
+            else
+            {
+                canvas = gameObject.GetComponent<Canvas>();
+            }
+        }
 
         public static void Open<T>(params object[] objs) where T : BaseUI
         {
@@ -19,7 +34,7 @@ namespace UI
                 return;
             }
 
-            var attribute = type.GetCustomAttribute<UIPrefabAttribute>();
+            var attribute = type.GetCustomAttribute<ObjectAttribute>();
             if (attribute == null)
             {
                 Debug.LogError($"UIManager: {type.Name} UIPrefab属性未找到。");
@@ -33,8 +48,8 @@ namespace UI
                 return;
             }
 
-            T instance = Object.Instantiate(prefab);
-            instance.OnCreated(objs);
+            T instance = UnityEngine.Object.Instantiate(prefab, canvas.transform);
+            instance.OnCreate(objs);
             uiDictionary.Add(type, instance);
             Debug.Log($"UIManager: 成功打开 {type.Name}。");
         }
@@ -48,29 +63,13 @@ namespace UI
                 return;
             }
 
-            Object.Destroy(ui.gameObject);
+            UnityEngine.Object.Destroy(ui.gameObject);
             uiDictionary.Remove(type);
             Debug.Log($"UIManager: 成功关闭 {type.Name}。");
         }
     }
 
-
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public class UIPrefabAttribute : Attribute
+    public abstract class BaseUI : BaseObject
     {
-        public string Path { get; }
-
-        public UIPrefabAttribute(string path)
-        {
-            Path = path;
-        }
-    }
-
-    public abstract class BaseUI : MonoBehaviour
-    {
-        public virtual void OnCreated(params object[] objs)
-        {
-            Debug.Log($"{GetType().Name} 已创建。附带参数数量: {objs?.Length ?? 0}");
-        }
     }
 }
