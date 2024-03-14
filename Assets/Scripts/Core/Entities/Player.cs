@@ -1,58 +1,26 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Core.Cards;
+using System.Linq;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Core.Entities
 {
-    public class Deck
+    public partial class Player : Entity
     {
-        private readonly List<Card> cards = new();
+        #region Events
 
-        public Deck()
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                cards.Add(new AttackCard("strike", "strike", 1, null));
-                cards.Add(new EffectCard("strike", "strike", 1, null));
-                cards.Add(new EquipmentCard("strike", "strike", new()));
-            }
+        public event EventHandler<CardsDrawnEventArgs> CardsDrawn;
+        public event EventHandler<CardsDiscardedEventArgs> CardsDiscarded;
+        public event EventHandler<CardsPlayedEventArgs> CardsPlayed;
 
-            Shuffle();
-        }
+        #endregion
 
-        public void Shuffle()
-        {
-            for (var i = 0; i < cards.Count; i++)
-            {
-                var x = Random.Range(i, cards.Count);
-                (cards[i], cards[x]) = (cards[x], cards[i]);
-            }
-        }
-
-        public IEnumerable<Card> Draw(int num)
-        {
-            List<Card> list = new();
-
-            int actualNum = Math.Min(num, cards.Count);
-
-            for (int i = 0; i < actualNum; i++)
-            {
-                Card card = cards[^1];
-                cards.RemoveAt(cards.Count - 1);
-                list.Add(card);
-            }
-
-            return list;
-        }
-    }
-
-    public class Player : Entity
-    {
         private readonly Deck deck = new();
-        private readonly List<Card> handCards = new();
+        private List<Card> handCards { get; } = new();
+
+        public List<Card> HandCards => new(handCards);
+
         public int Health { get; private set; }
         public int MaxHealth { get; private set; }
 
@@ -64,6 +32,8 @@ namespace Core.Entities
             Position = position;
             Health = health > maxHealth ? maxHealth : health;
         }
+
+        #region Actions
 
         public void TakeDamage(int damage)
         {
@@ -88,14 +58,30 @@ namespace Core.Entities
             throw new NotImplementedException();
         }
 
-        public void Draw(int num = 1)
+        public void DrawCards(int num = 1)
         {
-            handCards.AddRange(deck.Draw(num));
+            var cards = deck.Draw(num);
+            handCards.AddRange(cards);
+            CardsDrawn?.Invoke(this, new CardsDrawnEventArgs(cards));
         }
+
+        public void DiscardCards(List<Card> cards)
+        {
+            handCards.RemoveAll(cards.ToHashSet().Contains);
+            CardsDiscarded?.Invoke(this, new CardsDiscardedEventArgs(cards));
+        }
+        
+        public void PlayCards(List<Card> cards, Player targetPlayer)
+        {
+            handCards.RemoveAll(cards.ToHashSet().Contains);
+            CardsPlayed?.Invoke(this, new CardsPlayedEventArgs(cards, targetPlayer));
+        }
+
+        #endregion
 
         public IEnumerator Play()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitWhile(() => true);
         }
 
         public void EndTurn()
@@ -104,20 +90,8 @@ namespace Core.Entities
 
         public void MoveTo(Vector3Int target)
         {
-            EventSystem.InvokeEvent(this, new PlayerMoveArgs(Position, target));
+            EventSystem.InvokeEvent(this, new PlayerMoveEventArgs(Position, target));
             Position = target;
-        }
-    }
-
-    public class PlayerMoveArgs : EventArgs
-    {
-        public Vector3Int origin { get; }
-        public Vector3Int target { get; }
-
-        public PlayerMoveArgs(Vector3Int origin, Vector3Int target)
-        {
-            this.origin = origin;
-            this.target = target;
         }
     }
 }

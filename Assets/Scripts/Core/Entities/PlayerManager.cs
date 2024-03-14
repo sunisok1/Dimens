@@ -14,7 +14,7 @@ namespace Core.Entities
         public static void Initialize()
         {
             EventSystem.Subscribe<InitializeMapArgs>(OnInitializeMap);
-            EventSystem.Subscribe<PlayerMoveArgs>(OnPlayerMove);
+            EventSystem.Subscribe<PlayerMoveEventArgs>(OnPlayerMove);
         }
 
 
@@ -47,7 +47,7 @@ namespace Core.Entities
             map = e.map;
         }
 
-        private static void OnPlayerMove(object sender, PlayerMoveArgs e)
+        private static void OnPlayerMove(object sender, PlayerMoveEventArgs e)
         {
             if (sender is not Player player) return;
 
@@ -64,7 +64,7 @@ namespace Core.Entities
         public static void Dispose()
         {
             EventSystem.Unsubscribe<InitializeMapArgs>(OnInitializeMap);
-            EventSystem.Unsubscribe<PlayerMoveArgs>(OnPlayerMove);
+            EventSystem.Unsubscribe<PlayerMoveEventArgs>(OnPlayerMove);
             PlayerObjects.Clear();
         }
     }

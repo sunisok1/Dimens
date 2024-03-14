@@ -11,7 +11,7 @@ namespace Core.Entities
 
         public override void OnCreate(params object[] objs)
         {
-            base.OnCreate();
+            base.OnCreate(objs);
             var player = objs[0] as Player;
             NameText.text = player.Name;
             HealthText.text = $"{player.Health}/{player.MaxHealth}";

@@ -2,6 +2,7 @@
 
 namespace Core.Cards
 {
+    [CardImage("Art/Slay the Spire/Anger")]
     public class EquipmentCard : Card
     {
         public Equipment equipment { get; }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Core.Entities;
 using UnityEngine;
@@ -26,22 +27,55 @@ namespace Core.System
 
         private IEnumerator RunTurnCycle()
         {
-            currentPlayerNode = playersLinkedList.First;
+            SwitchToSpecificPlayer(playersLinkedList.First.Value);
 
             while (playersLinkedList.Count >= 2)
             {
                 yield return new WaitForSeconds(1);
-                yield return StartTurn(currentPlayerNode.Value);
+                Player player = currentPlayerNode.Value;
 
-                currentPlayerNode = currentPlayerNode.Next ?? playersLinkedList.First;
+                player.DrawCards(3);
+                yield return player.Play();
+                player.EndTurn();
+
+                SwitchToNextPlayer();
             }
         }
 
-        private IEnumerator StartTurn(Player player)
+        private void SwitchToNextPlayer()
         {
-            player.Draw(3);
-            yield return player.Play();
-            player.EndTurn();
+            // 触发事件之前的玩家
+            Player previousPlayer = currentPlayerNode.Value;
+
+            currentPlayerNode = currentPlayerNode.Next ?? playersLinkedList.First;
+
+            // 触发事件之后的玩家
+            Player currentPlayer = currentPlayerNode.Value;
+
+            // 触发玩家切换事件
+            EventSystem.InvokeEvent(this, new PlayerChangedEventArgs(previousPlayer, currentPlayer));
+        }
+
+        public void SwitchToSpecificPlayer(Player targetPlayer)
+        {
+            LinkedListNode<Player> targetNode = playersLinkedList.Find(targetPlayer);
+            if (targetNode == null) return;
+            Player previousPlayer = currentPlayerNode?.Value;
+            currentPlayerNode = targetNode;
+            Player currentPlayer = currentPlayerNode.Value;
+            EventSystem.InvokeEvent(this, new PlayerChangedEventArgs(previousPlayer, currentPlayer));
+        }
+    }
+
+    public class PlayerChangedEventArgs : EventArgs
+    {
+        public Player PreviousPlayer { get; }
+        public Player CurrentPlayer { get; }
+
+        public PlayerChangedEventArgs(Player previousPlayer, Player currentPlayer)
+        {
+            PreviousPlayer = previousPlayer;
+            CurrentPlayer = currentPlayer;
         }
     }
 }

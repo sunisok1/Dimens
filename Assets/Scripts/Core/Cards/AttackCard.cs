@@ -1,5 +1,6 @@
 ﻿namespace Core.Cards
 {
+    [CardImage("Art/Slay the Spire/Strike_R")]
     public class AttackCard : Card
     {
         public CardEffect Effect { get; private set; }

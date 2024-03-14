@@ -18,6 +18,11 @@ public abstract class BaseObject : MonoBehaviour
     public virtual void OnCreate(params object[] objs)
     {
         Debug.Log($"{GetType().Name} 已创建。附带参数数量: {objs?.Length ?? 0}");
+        FindComponents();
+    }
+
+    protected virtual void FindComponents()
+    {
     }
 }
 
