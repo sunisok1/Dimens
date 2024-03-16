@@ -15,9 +15,9 @@ namespace Core.Entities
             {
                 for (int i = 0; i < 5; i++)
                 {
-                    cards.Add(new AttackCard("strike", "strike", 1, null));
-                    cards.Add(new EffectCard("strike", "strike", 1, null));
-                    cards.Add(new EquipmentCard("strike", "strike", new()));
+                    cards.Add(new AttackCard("AttackCard", "", 1, null));
+                    cards.Add(new EffectCard("EffectCard", "", 1, null));
+                    cards.Add(new EquipmentCard("EquipmentCard", "", new()));
                 }
 
                 Shuffle();
