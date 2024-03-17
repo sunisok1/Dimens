@@ -4,9 +4,9 @@ namespace UI.Game
 {
     public class GameUI : BaseUI
     {
-        public override void OnCreate(params object[] objs)
+        public override void OnCreated(params object[] objs)
         {
-            base.OnCreate(objs);
+            base.OnCreated(objs);
         }
     }
 }

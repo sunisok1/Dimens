@@ -1,13 +1,11 @@
-﻿using System;
-using Common;
+﻿using Common;
 using Core.Cards;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Game
+namespace UI.Card
 {
-    using UnityEngine;
-
     [Object("Card/SlayTheSpireCardObject")]
     public class SlayTheSpireCardObject : BaseObject
     {
@@ -15,15 +13,19 @@ namespace UI.Game
         [SerializeField] private TextMeshProUGUI cardNameText;
         [SerializeField] private TextMeshProUGUI cardTypeText;
 
+        private SlayTheSpireCard slayTheSpireCard;
 
-        public override void OnCreate(params object[] objs)
+        public override void OnCreated(params object[] objs)
         {
-            base.OnCreate(objs);
+            base.OnCreated(objs);
             if (objs.Length > 0 && objs[0] is SlayTheSpireCard card)
-                SetCardInfo(card);
+            {
+                slayTheSpireCard = card;
+                SetCardInfo(slayTheSpireCard);
+            }
         }
 
-        public void SetCardInfo(SlayTheSpireCard card)
+        private void SetCardInfo(SlayTheSpireCard card)
         {
             cardImage.sprite = Resources.Load<Sprite>(card.portrait);
             cardNameText.text = card.name;

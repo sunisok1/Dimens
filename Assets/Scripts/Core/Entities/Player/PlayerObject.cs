@@ -10,9 +10,9 @@ namespace Core.Entities.Player
         [SerializeField] private TextMeshProUGUI NameText;
         [SerializeField] private TextMeshProUGUI HealthText;
 
-        public override void OnCreate(params object[] objs)
+        public override void OnCreated(params object[] objs)
         {
-            base.OnCreate(objs);
+            base.OnCreated(objs);
             var player = objs[0] as Player;
             NameText.text = player.Name;
             HealthText.text = $"{player.Health}/{player.MaxHealth}";

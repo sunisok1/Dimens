@@ -17,7 +17,7 @@ namespace Common
 
     public abstract class BaseObject : MonoBehaviour
     {
-        public virtual void OnCreate(params object[] objs)
+        public virtual void OnCreated(params object[] objs)
         {
             Debug.Log($"{GetType().Name} 已创建。附带参数数量: {objs?.Length ?? 0}");
             FindComponents();
@@ -49,7 +49,7 @@ namespace Common
             }
 
             T instance = UnityEngine.Object.Instantiate(prefab, parent);
-            instance.OnCreate(objs);
+            instance.OnCreated(objs);
             return instance;
         }
     }

@@ -49,7 +49,7 @@ namespace Common
             }
 
             T instance = UnityEngine.Object.Instantiate(prefab, canvas.transform);
-            instance.OnCreate(objs);
+            instance.OnCreated(objs);
             uiDictionary.Add(type, instance);
             Debug.Log($"UIManager: 成功打开 {type.Name}。");
         }

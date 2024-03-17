@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using Common;
 using Core.Cards;
-using Core.Cards.SlayTheSpire;
-using Core.Cards.SlayTheSpire.Red;
 using Core.Entities.Player;
-using Core.System;
+using Core.System.Turn;
+using UI.Card;
 using UnityEngine;
 
 namespace UI.Game
@@ -14,7 +13,7 @@ namespace UI.Game
     {
         [SerializeField] private RectTransform content;
 
-        private readonly Dictionary<AbstractCard, SlayTheSpireCardObject> cardUIDictionary = new();
+        private readonly Dictionary<AbstractCard, CardWrapper> cardUIDictionary = new();
         private Player currentPlayer;
 
         private void Start()
@@ -44,7 +43,7 @@ namespace UI.Game
             // 为手牌中的每张卡生成UI
             foreach (AbstractCard card in handCards)
             {
-                var cardUI = ObjectManager.Create<SlayTheSpireCardObject>(content, card);
+                var cardUI = ObjectManager.Create<CardWrapper>(content, card);
                 cardUIDictionary.Add(card, cardUI);
             }
         }
@@ -73,11 +72,11 @@ namespace UI.Game
             {
                 if (!cardUIDictionary.ContainsKey(card))
                 {
-                    SlayTheSpireCardObject cardObject;
+                    CardWrapper cardObject;
                     switch (card)
                     {
                         case SlayTheSpireCard slayTheSpireCard:
-                            cardObject = ObjectManager.Create<SlayTheSpireCardObject>(content, slayTheSpireCard);
+                            cardObject = ObjectManager.Create<CardWrapper>(content, slayTheSpireCard);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(nameof(card));
@@ -93,7 +92,7 @@ namespace UI.Game
         {
             foreach (var card in e.Cards)
             {
-                if (cardUIDictionary.TryGetValue(card, out SlayTheSpireCardObject cardUI))
+                if (cardUIDictionary.TryGetValue(card, out CardWrapper cardUI))
                 {
                     Destroy(cardUI.gameObject);
                     cardUIDictionary.Remove(card);
@@ -103,7 +102,7 @@ namespace UI.Game
 
         private void OnCardsPlayed(object sender, CardsPlayedEventArgs e)
         {
-            if (cardUIDictionary.TryGetValue(e.Card, out SlayTheSpireCardObject cardUI))
+            if (cardUIDictionary.TryGetValue(e.Card, out CardWrapper cardUI))
             {
                 Destroy(cardUI.gameObject);
                 cardUIDictionary.Remove(e.Card);

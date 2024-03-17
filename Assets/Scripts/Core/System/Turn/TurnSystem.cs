@@ -5,7 +5,7 @@ using Common;
 using Core.Entities.Player;
 using UnityEngine;
 
-namespace Core.System
+namespace Core.System.Turn
 {
     public class TurnSystem
     {
