@@ -1,7 +1,4 @@
-﻿using System;
-using Cinemachine;
-using Core.System;
-using Unity.VisualScripting;
+﻿using Cinemachine;
 using UnityEngine;
 
 namespace UI.CameraMoving

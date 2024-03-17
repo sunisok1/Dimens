@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core;
-using Core.Entities;
+using Common;
+using Core.Cards;
+using Core.Cards.SlayTheSpire;
+using Core.Cards.SlayTheSpire.Red;
+using Core.Entities.Player;
 using Core.System;
 using UnityEngine;
 
@@ -11,7 +14,7 @@ namespace UI.Game
     {
         [SerializeField] private RectTransform content;
 
-        private readonly Dictionary<Card, CardObject> cardUIDictionary = new();
+        private readonly Dictionary<AbstractCard, SlayTheSpireCardObject> cardUIDictionary = new();
         private Player currentPlayer;
 
         private void Start()
@@ -22,13 +25,13 @@ namespace UI.Game
 
         private void OnPlayerChanged(object sender, PlayerChangedEventArgs e)
         {
-            List<Card> handCards = e.CurrentPlayer.HandCards;
+            List<AbstractCard> handCards = e.CurrentPlayer.HandCards;
             UnsubscribeEvents(e.PreviousPlayer);
             SubscribeEvents(e.CurrentPlayer);
             UpdateCards(handCards);
         }
 
-        private void UpdateCards(List<Card> handCards)
+        private void UpdateCards(List<AbstractCard> handCards)
         {
             // 销毁并清除所有当前的卡牌UI
             foreach (var cardObject in cardUIDictionary.Values)
@@ -39,10 +42,9 @@ namespace UI.Game
             cardUIDictionary.Clear();
 
             // 为手牌中的每张卡生成UI
-            foreach (Card card in handCards)
+            foreach (AbstractCard card in handCards)
             {
-                var cardUI = ObjectManager.Create<CardObject>(content);
-                cardUI.SetCardInfo(card);
+                var cardUI = ObjectManager.Create<SlayTheSpireCardObject>(content, card);
                 cardUIDictionary.Add(card, cardUI);
             }
         }
@@ -71,8 +73,16 @@ namespace UI.Game
             {
                 if (!cardUIDictionary.ContainsKey(card))
                 {
-                    var cardObject = ObjectManager.Create<CardObject>(content);
-                    cardObject.SetCardInfo(card);
+                    SlayTheSpireCardObject cardObject;
+                    switch (card)
+                    {
+                        case SlayTheSpireCard slayTheSpireCard:
+                            cardObject = ObjectManager.Create<SlayTheSpireCardObject>(content, slayTheSpireCard);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(card));
+                    }
+
                     cardUIDictionary.Add(card, cardObject);
                 }
             }
@@ -83,7 +93,7 @@ namespace UI.Game
         {
             foreach (var card in e.Cards)
             {
-                if (cardUIDictionary.TryGetValue(card, out CardObject cardUI))
+                if (cardUIDictionary.TryGetValue(card, out SlayTheSpireCardObject cardUI))
                 {
                     Destroy(cardUI.gameObject);
                     cardUIDictionary.Remove(card);
@@ -93,13 +103,10 @@ namespace UI.Game
 
         private void OnCardsPlayed(object sender, CardsPlayedEventArgs e)
         {
-            foreach (var card in e.Cards)
+            if (cardUIDictionary.TryGetValue(e.Card, out SlayTheSpireCardObject cardUI))
             {
-                if (cardUIDictionary.TryGetValue(card, out CardObject cardUI))
-                {
-                    Destroy(cardUI.gameObject);
-                    cardUIDictionary.Remove(card);
-                }
+                Destroy(cardUI.gameObject);
+                cardUIDictionary.Remove(e.Card);
             }
         }
 

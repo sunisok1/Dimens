@@ -130,22 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 855240864}
     m_Modifications:
-    - target: {fileID: 1668670453666739775, guid: bdca837a14f1ba24a97e0f9ef3094fea, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1668670453666739775, guid: bdca837a14f1ba24a97e0f9ef3094fea, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1668670453666739775, guid: bdca837a14f1ba24a97e0f9ef3094fea, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1668670453666739775, guid: bdca837a14f1ba24a97e0f9ef3094fea, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3459799112187726022, guid: bdca837a14f1ba24a97e0f9ef3094fea, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -235,7 +219,7 @@ PrefabInstance:
       value: GameUI
       objectReference: {fileID: 0}
     - target: {fileID: 6480189900414171275, guid: bdca837a14f1ba24a97e0f9ef3094fea, type: 3}
-      propertyPath: m_SizeDelta.x
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -294,7 +278,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.799999
+  orthographic size: 5.000001
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -440,7 +424,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -610,7 +594,6 @@ GameObject:
   - component: {fileID: 2054054050}
   - component: {fileID: 2054054049}
   - component: {fileID: 2054054048}
-  - component: {fileID: 2054054051}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -661,18 +644,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2054054051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054054047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f98be60b190446292f5104a77f42909, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2099792025
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,7 +698,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 4.799999
+    OrthographicSize: 5.000001
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

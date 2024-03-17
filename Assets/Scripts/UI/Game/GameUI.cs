@@ -1,5 +1,4 @@
-using Core.System;
-using UnityEngine;
+using Common;
 
 namespace UI.Game
 {

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: aa2873de3d1efc846a7fe03c775ed28f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Andada
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 277d37341956da84ea3e7c3667a26345, type: 3}
+  - {fileID: 12800000, guid: 2484b5b83a3e26b4c89962aa4b2539c5, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,12 +1,13 @@
 using System;
-using Core.Entities;
+using Common;
+using Core.Entities.Player;
+using Core.Maps;
 using Core.System;
 using UnityEngine;
 
 namespace Core
 {
     [RequireComponent(typeof(IMapGenerator))]
-    [RequireComponent(typeof(TurnSystem))]
     public class GameManager : MonoBehaviour
     {
         private Map gameMap;
@@ -49,14 +50,7 @@ namespace Core
 
         private void InitializeTurnSystem()
         {
-            var players = new Player[9];
-            for (var i = 0; i < players.Length; i++)
-            {
-                players[i] = PlayerManager.CreatePlayer($"player_{i}", 100, 100);
-            }
-
-            turnSystem = GetComponent<TurnSystem>();
-            turnSystem.Initialize(players);
+            turnSystem = new();
 
             EventSystem.InvokeEvent(this, new InitializeTurnSystemArgs
             {

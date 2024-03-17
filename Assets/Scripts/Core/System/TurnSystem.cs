@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Core.Entities;
+using Common;
+using Core.Entities.Player;
 using UnityEngine;
 
 namespace Core.System
 {
-    public class TurnSystem : MonoBehaviour
+    public class TurnSystem
     {
         private readonly LinkedList<Player> playersLinkedList = new();
         private LinkedListNode<Player> currentPlayerNode;
 
-        public void Initialize(IEnumerable<Player> players)
+        public TurnSystem()
         {
-            if (players == null) return;
+            var players = new Player[9];
+            for (var i = 0; i < players.Length; i++)
+            {
+                players[i] = PlayerManager.CreatePlayer($"player_{i}", 100, 100);
+            }
 
             foreach (Player player in players)
             {
@@ -22,7 +27,7 @@ namespace Core.System
 
             if (playersLinkedList.Count == 0) return;
 
-            StartCoroutine(RunTurnCycle());
+            this.StartCoroutine(RunTurnCycle());
         }
 
         private IEnumerator RunTurnCycle()
