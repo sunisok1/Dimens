@@ -9,8 +9,15 @@ using UnityEngine.EventSystems;
 namespace UI.Card
 {
     [Object("Card/CardWrapper")]
-    public class CardWrapper : BaseObject, ISelectable<CardWrapper>, IPointerClickHandler
+    public class CardWrapper : BaseObject, ISelectable<AbstractCard>
     {
+        private static readonly InputSystem<CardWrapper, AbstractCard> inputSystem;
+
+        static CardWrapper()
+        {
+            inputSystem = InputSystem.Create<CardWrapper, AbstractCard>();
+        }
+
         private AbstractCard card;
         private bool selected;
 
@@ -56,6 +63,8 @@ namespace UI.Card
             return selectedItems.Count < 1;
         }
 
+        public AbstractCard Data => card;
+
         public void OnSelected()
         {
             MoveTransform(false);
@@ -74,11 +83,11 @@ namespace UI.Card
         {
             if (selected)
             {
-                InputSystem<CardWrapper>.Unselect(this);
+                inputSystem.Unselect(this);
             }
             else
             {
-                InputSystem<CardWrapper>.Select(this);
+                inputSystem.Select(this);
             }
         }
     }

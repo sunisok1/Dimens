@@ -2,49 +2,133 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Core.System.Input
 {
-    public interface ISelectable<T>
+    public interface ISelectable<out T> : IPointerClickHandler
     {
-        public bool CanSelect(HashSet<T> selectedItems);
+        public T Data { get; }
         public void OnSelected();
         public void OnUnselected();
     }
 
-    public static class InputSystem<T> where T : ISelectable<T>
+    public static class InputSystem
     {
-        private static readonly HashSet<T> selectedItems = new();
-
-        public static void Select(T item)
+        public static InputSystem<T, TData> Create<T, TData>() where T : ISelectable<TData>
         {
-            if (item.CanSelect(selectedItems))
+            return new InputSystem<T, TData>();
+        }
+    }
+
+    public enum SelectionMode
+    {
+        Single,
+        Multiple
+    }
+
+    public enum ExceedSelectionLimitBehavior
+    {
+        CancelEarliest, // 取消最先选中的单位
+        CancelCurrentSelection // 取消当前的选择
+    }
+
+    public class InputSystem<T, TData> where T : ISelectable<TData>
+    {
+        private readonly LinkedList<T> selectedItems = new();
+
+        private SelectionMode selectionMode = SelectionMode.Multiple;
+        private int selectionLimit = int.MaxValue; // 默认无限制
+        private ExceedSelectionLimitBehavior limitBehavior = ExceedSelectionLimitBehavior.CancelEarliest;
+
+        public SelectionMode SelectionMode
+        {
+            get => selectionMode;
+            set
             {
-                if (selectedItems.Add(item))
+                ClearSelectedItems();
+                selectionMode = value;
+                switch (value)
                 {
-                    item.OnSelected();
+                    case SelectionMode.Single:
+                        selectionLimit = 1;
+                        break;
+                    case SelectionMode.Multiple:
+                        selectionLimit = int.MaxValue;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
                 }
             }
         }
 
-        public static void Unselect(T item)
+        public int SelectionLimit
         {
-            if (selectedItems.Remove(item))
+            get => selectionLimit;
+            set
             {
-                item.OnUnselected();
+                if (selectionMode != SelectionMode.Multiple) return;
+                while (selectedItems.Count > value)
+                {
+                    RemoveFirstItem();
+                }
+
+                selectionLimit = Mathf.Max(1, value);
             }
         }
 
-        public static IEnumerable<TResult> GetAllSelectedItems<TResult>(Func<T, TResult> selector)
+        public ExceedSelectionLimitBehavior LimitBehavior
         {
-            return selectedItems.Select(selector);
+            get => limitBehavior;
+            set => limitBehavior = value;
         }
 
-        public static void ClearSelectedItems()
+        public void Select(T item)
         {
+            if (selectedItems.Count >= selectionLimit)
+            {
+                switch (limitBehavior)
+                {
+                    case ExceedSelectionLimitBehavior.CancelEarliest:
+                        RemoveFirstItem();
+                        break;
+                    case ExceedSelectionLimitBehavior.CancelCurrentSelection:
+                        return;
+                }
+            }
+
+            selectedItems.AddLast(item);
+            item.OnSelected();
+        }
+
+        private void RemoveFirstItem()
+        {
+            T earliestItem = selectedItems.First();
+            selectedItems.RemoveFirst();
+            earliestItem.OnUnselected();
+        }
+
+        public void Unselect(T item)
+        {
+            selectedItems.Remove(item);
+            item.OnUnselected();
+        }
+
+        public IEnumerable<TData> GetAllSelectedItems()
+        {
+            return selectedItems.Select(item => item.Data);
+        }
+
+        public void ClearSelectedItems()
+        {
+            foreach (T item in selectedItems)
+            {
+                item.OnUnselected();
+            }
+
             selectedItems.Clear();
         }
 
-        public static int ItemCount => selectedItems.Count;
+        public int ItemCount => selectedItems.Count;
     }
 }
