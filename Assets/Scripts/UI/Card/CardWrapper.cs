@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common;
 using Core.Cards;
 using Core.System.Input;
@@ -8,7 +9,7 @@ using UnityEngine.EventSystems;
 namespace UI.Card
 {
     [Object("Card/CardWrapper")]
-    public class CardWrapper : BaseObject, ISelectable, IPointerClickHandler
+    public class CardWrapper : BaseObject, ISelectable<CardWrapper>, IPointerClickHandler
     {
         private AbstractCard card;
         private bool selected;
@@ -43,19 +44,27 @@ namespace UI.Card
             rectTransform.anchoredPosition = position;
         }
 
-        public void Select()
+        public void OnDestroy()
         {
-            InputSystem<AbstractCard>.Select(card);
-
             MoveTransform(true);
 
             selected = true;
         }
 
-        public void Unselect()
+        public bool CanSelect(HashSet<CardWrapper> selectedItems)
         {
-            InputSystem<AbstractCard>.Unselect(card);
+            return selectedItems.Count < 1;
+        }
 
+        public void OnSelected()
+        {
+            MoveTransform(false);
+
+            selected = false;
+        }
+
+        public void OnUnselected()
+        {
             MoveTransform(false);
 
             selected = false;
@@ -65,11 +74,11 @@ namespace UI.Card
         {
             if (selected)
             {
-                Unselect();
+                InputSystem<CardWrapper>.Unselect(this);
             }
             else
             {
-                Select();
+                InputSystem<CardWrapper>.Select(this);
             }
         }
     }
