@@ -1,50 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Common;
 using UnityEngine;
 
 namespace Core.System.Input
 {
-    public interface ISelectable<T>
+    public enum SelectionMode
     {
-        public bool CanSelect(HashSet<T> selectedItems);
-        public void OnSelected();
-        public void OnUnselected();
+        Single,
+        Multiple
     }
 
-    public static class InputSystem<T> where T : ISelectable<T>
+    public enum ExceedSelectionLimitBehavior
     {
-        private static readonly HashSet<T> selectedItems = new();
+        CancelEarliest, // 取消最先选中的单位
+        CancelCurrentSelection // 取消当前的选择
+    }
 
-        public static void Select(T item)
+    public class SelectEventArgs<T> : EventArgs
+    {
+        public readonly T item;
+        public readonly bool select;
+
+        public SelectEventArgs(T item, bool select)
         {
-            if (item.CanSelect(selectedItems))
+            this.item = item;
+            this.select = select;
+        }
+    }
+
+
+    public class InputSystem<T> : IDisposable
+    {
+        private readonly LinkedList<T> selectedItems = new();
+
+        private SelectionMode selectionMode = SelectionMode.Multiple;
+        private int selectionLimit = int.MaxValue; // 默认无限制
+        private ExceedSelectionLimitBehavior limitBehavior = ExceedSelectionLimitBehavior.CancelEarliest;
+
+        public InputSystem()
+        {
+            EventSystem.Subscribe<SelectEventArgs<T>>(Select);
+        }
+
+        public void Dispose()
+        {
+            EventSystem.Unsubscribe<SelectEventArgs<T>>(Select);
+        }
+
+        public SelectionMode SelectionMode
+        {
+            get => selectionMode;
+            set
             {
-                if (selectedItems.Add(item))
+                selectedItems.Clear();
+                selectionMode = value;
+                switch (value)
                 {
-                    item.OnSelected();
+                    case SelectionMode.Single:
+                        selectionLimit = 1;
+                        break;
+                    case SelectionMode.Multiple:
+                        selectionLimit = int.MaxValue;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
                 }
             }
         }
 
-        public static void Unselect(T item)
+        public int SelectionLimit
         {
-            if (selectedItems.Remove(item))
+            get => selectionLimit;
+            set
             {
-                item.OnUnselected();
+                if (selectionMode != SelectionMode.Multiple) return;
+                while (selectedItems.Count > value)
+                {
+                    selectedItems.RemoveFirst();
+                }
+
+                selectionLimit = Mathf.Max(1, value);
             }
         }
 
-        public static IEnumerable<TResult> GetAllSelectedItems<TResult>(Func<T, TResult> selector)
+        public ExceedSelectionLimitBehavior LimitBehavior
         {
-            return selectedItems.Select(selector);
+            get => limitBehavior;
+            set => limitBehavior = value;
         }
 
-        public static void ClearSelectedItems()
+        private void Select(object sender, SelectEventArgs<T> args)
         {
-            selectedItems.Clear();
+            if (args.select)
+            {
+                if (selectedItems.Count >= selectionLimit && limitBehavior == ExceedSelectionLimitBehavior.CancelEarliest)
+                {
+                    selectedItems.RemoveFirst();
+                }
+
+                selectedItems.AddLast(args.item);
+            }
+            else
+            {
+                selectedItems.Remove(args.item);
+            }
         }
 
-        public static int ItemCount => selectedItems.Count;
+
+        public IEnumerable<T> GetAllSelectedItems()
+        {
+            return selectedItems;
+        }
+
+        public int ItemCount => selectedItems.Count;
     }
 }

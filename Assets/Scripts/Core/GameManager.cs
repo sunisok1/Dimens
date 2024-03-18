@@ -51,23 +51,11 @@ namespace Core
         private void InitializeTurnSystem()
         {
             turnSystem = new();
-
-            EventSystem.InvokeEvent(this, new InitializeTurnSystemArgs
-            {
-                turnSystem = turnSystem
-            });
-
-            Debug.Log("Round System Initialized");
         }
     }
 
     public class InitializeMapArgs : EventArgs
     {
         public Map map;
-    }
-
-    public class InitializeTurnSystemArgs : EventArgs
-    {
-        public TurnSystem turnSystem;
     }
 }

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using Common;
 using Core.Cards;
 using Core.System.Input;
+using UI.Game;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using EventSystem = Common.EventSystem;
 
 namespace UI.Card
 {
     [Object("Card/CardWrapper")]
-    public class CardWrapper : BaseObject, ISelectable<CardWrapper>, IPointerClickHandler
+    public class CardWrapper : BaseObject, IPointerClickHandler
     {
         private AbstractCard card;
         private bool selected;
@@ -36,50 +38,41 @@ namespace UI.Card
             }
         }
 
-        private void MoveTransform(bool up)
+        private void MoveTransform(float moveAmount)
         {
             Vector2 position = rectTransform.anchoredPosition;
-            if (up) position.y += moveAmount;
-            else position.y -= moveAmount;
+            position.y += moveAmount;
             rectTransform.anchoredPosition = position;
         }
 
-        public void OnDestroy()
-        {
-            MoveTransform(true);
-
-            selected = true;
-        }
-
-        public bool CanSelect(HashSet<CardWrapper> selectedItems)
-        {
-            return selectedItems.Count < 1;
-        }
-
-        public void OnSelected()
-        {
-            MoveTransform(false);
-
-            selected = false;
-        }
-
-        public void OnUnselected()
-        {
-            MoveTransform(false);
-
-            selected = false;
-        }
+        public AbstractCard GetData() => card;
 
         public void OnPointerClick(PointerEventData eventData)
         {
             if (selected)
             {
-                InputSystem<CardWrapper>.Unselect(this);
+                OnSelected();
             }
             else
             {
-                InputSystem<CardWrapper>.Select(this);
+                OnUnselected();
             }
+        }
+
+        private void OnUnselected()
+        {
+            EventSystem.InvokeEvent(this, new SelectEventArgs<AbstractCard>(card, true));
+            MoveTransform(moveAmount);
+
+            selected = true;
+        }
+
+        private void OnSelected()
+        {
+            EventSystem.InvokeEvent(this, new SelectEventArgs<AbstractCard>(card, false));
+            MoveTransform(-moveAmount);
+
+            selected = false;
         }
     }
 }

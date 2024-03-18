@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Common;
 using Core.Cards;
 using Core.Entities.Player;
+using Core.System.Input;
 using Core.System.Turn;
 using UI.Card;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace UI.Game
 {
     public class CardPanel : MonoBehaviour
     {
+        public readonly InputSystem<AbstractCard> InputSystem = new();
         [SerializeField] private RectTransform content;
 
         private readonly Dictionary<AbstractCard, CardWrapper> cardUIDictionary = new();
