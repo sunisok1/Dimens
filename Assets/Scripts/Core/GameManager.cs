@@ -54,8 +54,5 @@ namespace Core
         }
     }
 
-    public class InitializeMapArgs : EventArgs
-    {
-        public Map map;
-    }
+
 }

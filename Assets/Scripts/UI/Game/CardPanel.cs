@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
+using Core.Action;
 using Core.Cards;
 using Core.Entities.Player;
 using Core.System.Input;
@@ -12,7 +13,7 @@ namespace UI.Game
 {
     public class CardPanel : MonoBehaviour
     {
-        public readonly InputSystem<AbstractCard> InputSystem = new();
+        public readonly InputSystem<AbstractCard> inputSystem = new();
         [SerializeField] private RectTransform content;
 
         private readonly Dictionary<AbstractCard, CardWrapper> cardUIDictionary = new();
@@ -54,60 +55,56 @@ namespace UI.Game
         {
             if (player == null) return;
             currentPlayer = player;
-            player.CardsDrawn += OnCardsDrawn;
-            player.CardsDiscarded += OnCardsDiscarded;
-            player.CardsPlayed += OnCardsPlayed;
+            player.OnCardDraw += OnCardDraw;
+            player.OnDiscard += OnDiscard;
+            player.OnPlayCard += OnPlayCard;
         }
 
         private void UnsubscribeEvents(Player player)
         {
             if (player == null) return;
             if (player != currentPlayer) return;
-            player.CardsDrawn -= OnCardsDrawn;
-            player.CardsDiscarded -= OnCardsDiscarded;
-            player.CardsPlayed -= OnCardsPlayed;
+            player.OnCardDraw -= OnCardDraw;
+            player.OnDiscard -= OnDiscard;
+            player.OnPlayCard -= OnPlayCard;
         }
 
-        private void OnCardsDrawn(object sender, CardsDrawnEventArgs e)
+        private void OnCardDraw(object sender, CardDrawArgs e)
         {
-            foreach (var card in e.Cards)
+            var card = e.card;
+            if (!cardUIDictionary.ContainsKey(card))
             {
-                if (!cardUIDictionary.ContainsKey(card))
+                CardWrapper cardObject;
+                switch (card)
                 {
-                    CardWrapper cardObject;
-                    switch (card)
-                    {
-                        case SlayTheSpireCard slayTheSpireCard:
-                            cardObject = ObjectManager.Create<CardWrapper>(content, slayTheSpireCard);
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException(nameof(card));
-                    }
-
-                    cardUIDictionary.Add(card, cardObject);
+                    case SlayTheSpireCard slayTheSpireCard:
+                        cardObject = ObjectManager.Create<CardWrapper>(content, slayTheSpireCard);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(card));
                 }
+
+                cardUIDictionary.Add(card, cardObject);
             }
         }
 
 
-        private void OnCardsDiscarded(object sender, CardsDiscardedEventArgs e)
+        private void OnDiscard(object sender, DiscardArgs e)
         {
-            foreach (var card in e.Cards)
-            {
-                if (cardUIDictionary.TryGetValue(card, out CardWrapper cardUI))
-                {
-                    Destroy(cardUI.gameObject);
-                    cardUIDictionary.Remove(card);
-                }
-            }
-        }
-
-        private void OnCardsPlayed(object sender, CardsPlayedEventArgs e)
-        {
-            if (cardUIDictionary.TryGetValue(e.Card, out CardWrapper cardUI))
+            var card = e.card;
+            if (cardUIDictionary.TryGetValue(card, out CardWrapper cardUI))
             {
                 Destroy(cardUI.gameObject);
-                cardUIDictionary.Remove(e.Card);
+                cardUIDictionary.Remove(card);
+            }
+        }
+
+        private void OnPlayCard(object sender, PlayCardArgs e)
+        {
+            if (cardUIDictionary.TryGetValue(e.card, out CardWrapper cardUI))
+            {
+                Destroy(cardUI.gameObject);
+                cardUIDictionary.Remove(e.card);
             }
         }
 

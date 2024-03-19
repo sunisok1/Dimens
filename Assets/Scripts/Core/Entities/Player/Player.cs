@@ -10,16 +10,8 @@ using UnityEngine;
 
 namespace Core.Entities.Player
 {
-    public partial class Player : Entity, IUser
+    public class Player : Entity, IUser, IPowerOwner
     {
-        #region Events
-
-        public event EventHandler<CardsDrawnEventArgs> CardsDrawn;
-        public event EventHandler<CardsDiscardedEventArgs> CardsDiscarded;
-        public event EventHandler<CardsPlayedEventArgs> CardsPlayed;
-
-        #endregion
-
         private readonly Deck deck = new(new RedFactory());
         private List<AbstractCard> handCards { get; } = new();
 
@@ -57,26 +49,31 @@ namespace Core.Entities.Player
             }
         }
 
-        
 
         public void DrawCards(int num = 1)
         {
             var cards = deck.Draw(num);
             handCards.AddRange(cards);
-            CardsDrawn?.Invoke(this, new CardsDrawnEventArgs(cards));
+            foreach (var card in cards)
+            {
+                OnCardDraw?.Invoke(this, new() { card = card });
+            }
         }
 
         public void DiscardCards(List<AbstractCard> cards)
         {
             handCards.RemoveAll(cards.ToHashSet().Contains);
-            CardsDiscarded?.Invoke(this, new CardsDiscardedEventArgs(cards));
+            foreach (var card in cards)
+            {
+                OnDiscard?.Invoke(this, new() { card = card });
+            }
         }
 
         public void PlayCard(AbstractCard card, ITarget target)
         {
             handCards.Remove(card);
             card.Use(this, target);
-            CardsPlayed?.Invoke(this, new CardsPlayedEventArgs(card, target));
+            OnPlayCard?.Invoke(this, new() { card = card, });
         }
 
         #endregion
@@ -92,8 +89,42 @@ namespace Core.Entities.Player
 
         public void MoveTo(Vector3Int target)
         {
-            EventSystem.InvokeEvent(this, new PlayerMoveEventArgs(Position, target));
+            EventSystem.InvokeEvent(this, new PlayerMoveEventArgs { origin = Position, target = target });
             Position = target;
         }
+
+        #region Events
+
+        public event EventHandler<DamageGiveArgs> AtDamageGive;
+        public event EventHandler<DamageGiveArgs> AtDamageFinalGive;
+        public event EventHandler<DamageGiveArgs> AtDamageReceive;
+        public event EventHandler AtStartOfTurn;
+        public event EventHandler DuringTurn;
+        public event EventHandler AtStartOfTurnPostDraw;
+        public event EventHandler<bool> AtEndOfTurn;
+        public event EventHandler<bool> AtEndOfTurnPreEndTurnCards;
+        public event EventHandler AtEndOfRound;
+        public event EventHandler OnScry;
+        public event EventHandler<DamageAllEnemiesArgs> OnDamageAllEnemies;
+        public event EventHandler<HealArgs> OnHeal;
+        public event EventHandler<AttackedArgs> OnAttacked;
+        public event EventHandler<AttackedArgs> OnAttackedToChangeDamage;
+        public event EventHandler<AttackedArgs> OnAttackToChangeDamage;
+        public event EventHandler<AttackedArgs> OnInflictDamage;
+        public event EventHandler<CardDrawArgs> OnCardDraw;
+        public event EventHandler<DiscardArgs> OnDiscard;
+        public event EventHandler<PlayCardArgs> OnPlayCard;
+        public event EventHandler OnUseCard;
+        public event EventHandler OnAfterUseCard;
+        public event EventHandler WasHpLost;
+        public event EventHandler OnSpecificTrigger;
+        public event EventHandler TriggerMarks;
+        public event EventHandler OnDeath;
+        public event EventHandler OnChannel;
+        public event EventHandler AtEnergyGain;
+        public event EventHandler OnExhaust;
+        public event EventHandler OnChangeStance;
+
+        #endregion
     }
 }
