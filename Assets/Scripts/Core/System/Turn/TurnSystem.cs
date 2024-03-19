@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Common;
 using Core.Entities.Player;
+using Core.GameObjects.Player;
 using UnityEngine;
 
 namespace Core.System.Turn

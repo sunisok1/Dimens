@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Entities
+namespace Core.GameObjects
 {
     public class EntityManager : MonoBehaviour
     {

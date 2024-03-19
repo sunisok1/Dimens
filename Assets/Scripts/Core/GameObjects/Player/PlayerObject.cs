@@ -2,20 +2,20 @@
 using TMPro;
 using UnityEngine;
 
-namespace Core.Entities.Player
+namespace Core.GameObjects.Player
 {
     [Object("Entity/Player")]
     public class PlayerObject : EntityObject
     {
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI healthText;
-        private Player player;
+        private Entities.Player.Player player;
 
 
         public override void OnCreated(params object[] objs)
         {
             base.OnCreated(objs);
-            if (objs[0] is not Player player) return;
+            if (objs[0] is not Entities.Player.Player player) return;
             nameText.text = player.Name;
             healthText.text = $"{player.Health}/{player.MaxHealth}";
         }

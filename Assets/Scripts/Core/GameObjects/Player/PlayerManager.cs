@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using Common;
+using Core.Entities.Player;
 using Core.Maps;
 using UnityEngine;
 
-namespace Core.Entities.Player
+namespace Core.GameObjects.Player
 {
     public static class PlayerManager
     {
         private static Map map;
-        private static readonly Dictionary<Player, PlayerObject> PlayerObjects = new();
+        private static readonly Dictionary<Entities.Player.Player, PlayerObject> PlayerObjects = new();
 
         public static void Initialize()
         {
@@ -19,7 +20,7 @@ namespace Core.Entities.Player
 
         #region PublicMethod
 
-        public static Player CreatePlayer(string name, int health, int maxHealth)
+        public static Entities.Player.Player CreatePlayer(string name, int health, int maxHealth)
         {
             if (!map.GetUnoccupiedPosition(out Vector3Int initialPosition))
             {
@@ -28,7 +29,7 @@ namespace Core.Entities.Player
 
             map.MarkPositionOccupied(initialPosition);
 
-            var player = new Player(name, health, maxHealth, initialPosition);
+            var player = new Entities.Player.Player(name, health, maxHealth, initialPosition);
             var playerObject = ObjectManager.Create<PlayerObject>(map.PlayerContent, player);
             playerObject.transform.position = map.GetWorldPosition(initialPosition);
 
@@ -48,7 +49,7 @@ namespace Core.Entities.Player
 
         private static void OnPlayerMove(object sender, PlayerMoveEventArgs e)
         {
-            if (sender is not Player player) return;
+            if (sender is not Entities.Player.Player player) return;
 
             map.MarkPositionUnoccupied(e.origin);
             map.MarkPositionOccupied(e.target);

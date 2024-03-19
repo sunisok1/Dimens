@@ -1,7 +1,7 @@
 ﻿using Common;
-using Core.System.Input;
+using Core.Entities;
 
-namespace Core.Entities
+namespace Core.GameObjects
 {
     public class EntityObject : BaseObject
     {

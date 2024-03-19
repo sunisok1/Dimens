@@ -1,6 +1,7 @@
 using System;
 using Common;
 using Core.Entities.Player;
+using Core.GameObjects.Player;
 using Core.Maps;
 using Core.System.Turn;
 using UnityEngine;
