@@ -8,13 +8,17 @@ using Core.System.Input;
 using Core.System.Turn;
 using UI.Card;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Game
 {
     public class CardPanel : MonoBehaviour
     {
-        public readonly InputSystem<AbstractCard> inputSystem = new();
+        private readonly InputSystem<AbstractCard> inputSystem = new();
         [SerializeField] private RectTransform content;
+        [SerializeField] private Button confirmButton;
+        [SerializeField] private Button cancelButton;
+        [SerializeField] private Button endTurnButton;
 
         private readonly Dictionary<AbstractCard, CardWrapper> cardUIDictionary = new();
         private Player currentPlayer;
@@ -22,6 +26,8 @@ namespace UI.Game
         private void Start()
         {
             EventSystem.Subscribe<PlayerChangedEventArgs>(OnPlayerChanged);
+
+            EventSystem.Subscribe<SelectEventArgs<AbstractCard>>(inputSystem.ToggleSelection);
         }
 
 
@@ -31,6 +37,7 @@ namespace UI.Game
             UnsubscribeEvents(e.PreviousPlayer);
             SubscribeEvents(e.CurrentPlayer);
             UpdateCards(handCards);
+            
         }
 
         private void UpdateCards(List<AbstractCard> handCards)
@@ -113,6 +120,7 @@ namespace UI.Game
         {
             EventSystem.Unsubscribe<PlayerChangedEventArgs>(OnPlayerChanged);
 
+            EventSystem.Unsubscribe<SelectEventArgs<AbstractCard>>(inputSystem.ToggleSelection);
             UnsubscribeEvents(currentPlayer); // 使用currentPlayer确保正确地取消订阅  }
         }
     }

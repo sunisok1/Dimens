@@ -43,8 +43,6 @@ namespace UI.Card
             rectTransform.anchoredPosition = position;
         }
 
-        public AbstractCard GetData() => card;
-
         public void OnPointerClick(PointerEventData eventData)
         {
             if (selected)

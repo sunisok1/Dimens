@@ -5,40 +5,27 @@ using UnityEngine;
 
 namespace Core.System.Input
 {
-    public enum SelectionMode
+    public class InputSystem<T>
     {
-        Single,
-        Multiple
-    }
+        public enum InputSelectionMode
+        {
+            Single,
+            Multiple
+        }
 
-    public enum ExceedSelectionLimitBehavior
-    {
-        CancelEarliest, // 取消最先选中的单位
-        CancelCurrentSelection // 取消当前的选择
-    }
+        public enum ExceedSelectionLimitBehavior
+        {
+            CancelEarliest, // 取消最先选中的单位
+            CancelCurrentSelection // 取消当前的选择
+        }
 
-
-
-
-    public class InputSystem<T> : IDisposable
-    {
         private readonly LinkedList<T> selectedItems = new();
 
-        private SelectionMode selectionMode = SelectionMode.Multiple;
+        private InputSelectionMode selectionMode = InputSelectionMode.Multiple;
         private int selectionLimit = int.MaxValue; // 默认无限制
         private ExceedSelectionLimitBehavior limitBehavior = ExceedSelectionLimitBehavior.CancelEarliest;
 
-        public InputSystem()
-        {
-            EventSystem.Subscribe<SelectEventArgs<T>>(Select);
-        }
-
-        public void Dispose()
-        {
-            EventSystem.Unsubscribe<SelectEventArgs<T>>(Select);
-        }
-
-        public SelectionMode SelectionMode
+        public InputSelectionMode SelectionMode
         {
             get => selectionMode;
             set
@@ -47,30 +34,15 @@ namespace Core.System.Input
                 selectionMode = value;
                 switch (value)
                 {
-                    case SelectionMode.Single:
+                    case InputSelectionMode.Single:
                         selectionLimit = 1;
                         break;
-                    case SelectionMode.Multiple:
+                    case InputSelectionMode.Multiple:
                         selectionLimit = int.MaxValue;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(value), value, null);
                 }
-            }
-        }
-
-        public int SelectionLimit
-        {
-            get => selectionLimit;
-            set
-            {
-                if (selectionMode != SelectionMode.Multiple) return;
-                while (selectedItems.Count > value)
-                {
-                    selectedItems.RemoveFirst();
-                }
-
-                selectionLimit = Mathf.Max(1, value);
             }
         }
 
@@ -80,7 +52,23 @@ namespace Core.System.Input
             set => limitBehavior = value;
         }
 
-        private void Select(object sender, SelectEventArgs<T> args)
+        public int SelectionLimit
+        {
+            get => selectionLimit;
+            set
+            {
+                if (selectionMode != InputSelectionMode.Multiple) return;
+                while (selectedItems.Count > value)
+                {
+                    selectedItems.RemoveFirst();
+                }
+
+                selectionLimit = Mathf.Max(1, value);
+            }
+        }
+
+
+        public void ToggleSelection(object sender, SelectEventArgs<T> args)
         {
             if (args.select)
             {
