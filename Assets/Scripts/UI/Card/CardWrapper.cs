@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Common;
 using Core.Cards;
 using Core.System.Input;
-using UI.Game;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using EventSystem = Common.EventSystem;

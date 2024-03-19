@@ -1,9 +1,6 @@
 ﻿using Common;
-using Core.System.Input;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Core.Entities.Player
 {
