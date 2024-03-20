@@ -1,8 +1,6 @@
-using System;
-using Common;
-using Core.Entities.Player;
-using Core.GameObjects.Player;
+using Core.Entities.Players;
 using Core.Maps;
+using Core.Maps.EntityFactory;
 using Core.System.Turn;
 using UnityEngine;
 
@@ -11,49 +9,20 @@ namespace Core
     [RequireComponent(typeof(IMapGenerator))]
     public class GameManager : MonoBehaviour
     {
-        private Map gameMap;
-        private TurnSystem turnSystem;
-
         private void Start()
         {
-            InitializeGame();
-        }
-
-        private void OnDestroy()
-        {
-            DisposeGame();
-        }
-
-        private void InitializeGame()
-        {
-            PlayerManager.Initialize();
-            InitializeMap();
-            InitializeTurnSystem();
-        }
-
-        private void DisposeGame()
-        {
-            PlayerManager.Dispose();
-        }
-
-        private void InitializeMap()
-        {
             var mapGenerator = GetComponent<IMapGenerator>();
-            gameMap = mapGenerator.GenerateMap();
+            var gameMap = mapGenerator.GenerateMap();
+            PlayerFactory playerFactory = new(gameMap);
 
-            EventSystem.InvokeEvent(this, new InitializeMapArgs
+            var players = new Player[9];
+            for (var i = 0; i < players.Length; i++)
             {
-                map = gameMap
-            });
+                players[i] = playerFactory.CreatePlayer($"player_{i}", 100, 100);
+            }
 
-            Debug.Log("Map Initialized");
-        }
-
-        private void InitializeTurnSystem()
-        {
-            turnSystem = new();
+            var turnSystem = new TurnSystem(players);
+            StartCoroutine(turnSystem.RunTurnCycle());
         }
     }
-
-
 }

@@ -9,7 +9,7 @@ namespace Core.Cards.CardFactory
         {
             for (int i = 0; i < 5; i++)
             {
-                yield return new Strike_Red();
+                yield return new StrikeRed();
             }
         }
     }

@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Common;
-using Core.Entities.Player;
-using Core.GameObjects.Player;
+using Core.Entities.Players;
 using UnityEngine;
 
 namespace Core.System.Turn
@@ -13,25 +12,15 @@ namespace Core.System.Turn
         private readonly LinkedList<Player> playersLinkedList = new();
         private LinkedListNode<Player> currentPlayerNode;
 
-        public TurnSystem()
+        public TurnSystem(IEnumerable<Player> players)
         {
-            var players = new Player[9];
-            for (var i = 0; i < players.Length; i++)
-            {
-                players[i] = PlayerManager.CreatePlayer($"player_{i}", 100, 100);
-            }
-
             foreach (Player player in players)
             {
                 playersLinkedList.AddLast(player);
             }
-
-            if (playersLinkedList.Count == 0) return;
-
-            this.StartCoroutine(RunTurnCycle());
         }
 
-        private IEnumerator RunTurnCycle()
+        public IEnumerator RunTurnCycle()
         {
             SwitchToSpecificPlayer(playersLinkedList.First.Value);
 

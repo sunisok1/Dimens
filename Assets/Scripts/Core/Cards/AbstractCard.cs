@@ -1,6 +1,4 @@
-﻿using Core.Action;
-
-namespace Core.Cards
+﻿namespace Core.Cards
 {
     public abstract class AbstractCard
     {
