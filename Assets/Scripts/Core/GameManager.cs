@@ -1,6 +1,6 @@
-using Core.Entities.Players;
-using Core.Maps;
-using Core.Maps.EntityFactory;
+using Core.Entities;
+using Core.Entities.EntityFactory;
+using Core.Map;
 using Core.System.Turn;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 ﻿using Common;
 using System;
-using Core.ActionCommand;
-using Core.ActionCommand.Commands;
+using Core.GameCommand;
+using Core.GameCommand.Commands;
 
 namespace Core.Cards.SlayTheSpire.Red
 {

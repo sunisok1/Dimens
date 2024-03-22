@@ -1,5 +1,6 @@
 ﻿using System;
 using Common;
+using Core;
 using Core.Cards;
 using UnityEngine;
 using UnityEngine.EventSystems;

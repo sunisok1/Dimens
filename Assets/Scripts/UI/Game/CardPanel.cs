@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
+using Core;
 using Core.Cards;
-using Core.Entities.Players;
+using Core.Entities;
 using Core.System.Input;
 using Core.System.Turn;
 using UI.Card;

@@ -1,5 +1,5 @@
 ﻿using Common;
-using Core.Entities.Players;
+using Core.Entities;
 using TMPro;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace Core.GameObjects.Players
         public override void OnCreated(params object[] objs)
         {
             base.OnCreated(objs);
-            if (objs[0] is not Entities.Players.Player player) return;
+            if (objs[0] is not Player player) return;
             nameText.text = player.Name;
             healthText.text = $"{player.Health}/{player.MaxHealth}";
         }

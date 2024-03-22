@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Common;
-using Core.Entities.Players;
+using Core.Entities;
 using UnityEngine;
 
 namespace Core.System.Turn

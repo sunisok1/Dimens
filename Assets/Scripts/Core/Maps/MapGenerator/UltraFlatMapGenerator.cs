@@ -1,4 +1,5 @@
-﻿using Core.Maps.ConcreteMaps;
+﻿using Common;
+using Core.Map;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,7 +17,10 @@ namespace Core.Maps.MapGenerator
         {
             Transform mapInstance = Instantiate(mapObjectPrefab);
             var ultraFlatMap = new UltraFlatMap(mapInstance, tile, Width, Height);
-            ultraFlatMap.SubscribeEvents();
+
+            EventSystem.Subscribe<EntityCreatedArgs>(ultraFlatMap.OnEntityCreated);
+            EventSystem.Subscribe<EntityMoveArgs>(ultraFlatMap.OnEntityMove);
+
             return ultraFlatMap;
         }
     }
