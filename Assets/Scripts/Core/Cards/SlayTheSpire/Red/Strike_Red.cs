@@ -1,5 +1,8 @@
 ﻿using Common;
 using System;
+using Classes;
+using Classes.Entities;
+using Core.Entities;
 using Core.GameCommand;
 using Core.GameCommand.Commands;
 

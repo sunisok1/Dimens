@@ -1,4 +1,8 @@
-﻿namespace Core.GameCommand.Commands
+﻿using Classes;
+using Classes.Entities;
+using Core.Entities;
+
+namespace Core.GameCommand.Commands
 {
     public class DamageCommand : ICommand
     {

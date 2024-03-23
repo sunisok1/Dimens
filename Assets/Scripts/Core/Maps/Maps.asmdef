@@ -1,0 +1,20 @@
+{
+  "name": "Maps",
+  "rootNamespace": "",
+  "references": [
+    "GUID:aa261700ff581154dadef9470165f9a9",
+    "GUID:2e5ca192620a6c94eb67d149d88b2a9a",
+    "GUID:54d979557f948794bbdb757b777997f8",
+    "GUID:9b3c106950ad24d41a2be1007f026926",
+    "GUID:6b0320be07c747a4b1ce09cc1e96adc4"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

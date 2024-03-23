@@ -1,6 +1,6 @@
 {
     "name": "Classes",
-    "rootNamespace": "",
+    "rootNamespace": "Classes",
     "references": [
         "GUID:54d979557f948794bbdb757b777997f8"
     ],

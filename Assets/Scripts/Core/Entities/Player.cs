@@ -2,13 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Classes;
+using Classes.Entities;
 using Core.Cards;
 using Core.Cards.CardFactory;
 using UnityEngine;
 
 namespace Core.Entities
 {
-    public class Player : AbstractEntity, IUser, IPowerOwner, IMovable
+    public class Player : AbstractEntity, IUser, IMovable
     {
         private readonly Deck deck = new(new RedFactory());
         private List<AbstractCard> handCards { get; } = new();
@@ -87,39 +89,13 @@ namespace Core.Entities
 
         #region Events
 
-        public event EventHandler<DamageGiveArgs> AtDamageGive;
-        public event EventHandler<DamageGiveArgs> AtDamageFinalGive;
-        public event EventHandler<DamageGiveArgs> AtDamageReceive;
-        public event EventHandler AtStartOfTurn;
-        public event EventHandler DuringTurn;
-        public event EventHandler AtStartOfTurnPostDraw;
-        public event EventHandler<bool> AtEndOfTurn;
-        public event EventHandler<bool> AtEndOfTurnPreEndTurnCards;
-        public event EventHandler AtEndOfRound;
-        public event EventHandler OnScry;
-        public event EventHandler<DamageAllEnemiesArgs> OnDamageAllEnemies;
-        public event EventHandler<HealArgs> OnHeal;
-        public event EventHandler<AttackedArgs> OnAttacked;
-        public event EventHandler<AttackedArgs> OnAttackedToChangeDamage;
-        public event EventHandler<AttackedArgs> OnAttackToChangeDamage;
-        public event EventHandler<AttackedArgs> OnInflictDamage;
         public event EventHandler<CardDrawArgs> OnCardDraw;
         public event EventHandler<DiscardArgs> OnDiscard;
         public event EventHandler<PlayCardArgs> OnPlayCard;
-        public event EventHandler OnUseCard;
-        public event EventHandler OnAfterUseCard;
-        public event EventHandler WasHpLost;
-        public event EventHandler OnSpecificTrigger;
-        public event EventHandler TriggerMarks;
-        public event EventHandler OnDeath;
-        public event EventHandler OnChannel;
-        public event EventHandler AtEnergyGain;
-        public event EventHandler OnExhaust;
-        public event EventHandler OnChangeStance;
 
         #endregion
 
-        public void MoveTo( Vector3Int target)
+        public void MoveTo(Vector3Int target)
         {
         }
     }

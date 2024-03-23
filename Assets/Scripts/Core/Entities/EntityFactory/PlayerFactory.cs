@@ -1,4 +1,6 @@
-﻿using Common;
+﻿using Classes;
+using Classes.Entities;
+using Common;
 using UnityEngine;
 
 namespace Core.Entities.EntityFactory

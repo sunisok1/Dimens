@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Core.Card;
+using Classes;
 using Core.Cards.SlayTheSpire.Red;
 
 namespace Core.Cards.CardFactory

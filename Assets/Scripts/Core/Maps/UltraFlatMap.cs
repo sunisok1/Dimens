@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Classes;
+using Classes.Entities;
 using Common;
 using Core.Entities;
-using Core.GameObjects;
-using Core.GameObjects.Players;
+using Core.Entities.GameObjects.Players;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

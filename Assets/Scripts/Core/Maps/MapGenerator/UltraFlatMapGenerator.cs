@@ -1,5 +1,8 @@
-﻿using Common;
-using Core.Map;
+﻿using Classes;
+using Classes.Entities;
+using Classes.Maps;
+using Common;
+using Core.Entities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

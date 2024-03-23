@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Card;
+using Classes;
 using Core.Cards;
 
 namespace Core.Entities
