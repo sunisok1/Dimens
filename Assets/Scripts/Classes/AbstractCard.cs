@@ -1,4 +1,4 @@
-﻿using Classes.Entities;
+﻿using Classes.Entities.Controller;
 
 namespace Classes
 {
@@ -20,6 +20,6 @@ namespace Classes
             this.rawDescription = rawDescription;
         }
 
-        public abstract void Use(IUser user, ITarget target);
+        public abstract void Use(IUserController userController, IHealthController target);
     }
 }

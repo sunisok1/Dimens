@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Classes;
-using Classes.Entities;
-using Common;
-using Core.Entities;
-using Core.Entities.GameObjects.Players;
+﻿using Classes.Maps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,14 +6,13 @@ namespace Core.Maps
 {
     public class UltraFlatMap : AbstractMap
     {
-        private readonly Dictionary<AbstractEntity, EntityObject> entityObjects = new();
         private readonly Tilemap tilemap;
-        private Transform EntityContent { get; }
+        private readonly Transform entityContent;
 
         public UltraFlatMap(Transform mapInstance, TileBase tile, int width, int height) : base(width, height)
         {
             tilemap = mapInstance.Find("Grid/Tilemap").GetComponent<Tilemap>();
-            EntityContent = mapInstance.Find("Entities").transform;
+            entityContent = mapInstance.Find("Entities").transform;
             for (int i = 0; i < Width; i++)
             {
                 for (int j = 0; j < Height; j++)
@@ -43,27 +36,14 @@ namespace Core.Maps
             }
         }
 
-        public override void OnEntityCreated(object sender, EntityCreatedArgs e)
+        public override Vector3 GetWorldPosition(Vector3Int position)
         {
-            EntityObject entityObject;
-            switch (e.entity)
-            {
-                case Player player:
-                    entityObject = ObjectManager.Create<PlayerObject>(EntityContent, player);
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
-
-            entityObject.transform.position = tilemap.CellToWorld(e.initialPosition);
+            return tilemap.GetCellCenterWorld(position);
         }
 
-        public override void OnEntityMove(object sender, EntityMoveArgs e)
+        public override Transform GetContent()
         {
-            unoccupiedGrids.Add(e.origin);
-            unoccupiedGrids.Remove(e.target);
-
-            entityObjects[e.entity].transform.position = tilemap.CellToWorld(e.target);
+            return entityContent;
         }
     }
 }

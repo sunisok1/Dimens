@@ -1,8 +1,4 @@
-﻿using Classes;
-using Classes.Entities;
-using Classes.Maps;
-using Common;
-using Core.Entities;
+﻿using Classes.Maps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -20,10 +16,6 @@ namespace Core.Maps.MapGenerator
         {
             Transform mapInstance = Instantiate(mapObjectPrefab);
             var ultraFlatMap = new UltraFlatMap(mapInstance, tile, Width, Height);
-
-            EventSystem.Subscribe<EntityCreatedArgs>(ultraFlatMap.OnEntityCreated);
-            EventSystem.Subscribe<EntityMoveArgs>(ultraFlatMap.OnEntityMove);
-
             return ultraFlatMap;
         }
     }

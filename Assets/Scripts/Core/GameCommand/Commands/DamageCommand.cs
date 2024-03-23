@@ -1,15 +1,14 @@
 ﻿using Classes;
-using Classes.Entities;
-using Core.Entities;
+using Classes.Entities.Controller;
 
 namespace Core.GameCommand.Commands
 {
     public class DamageCommand : ICommand
     {
-        private readonly ITarget target;
+        private readonly IHealthController target;
         private readonly DamageInfo damageInfo;
 
-        public DamageCommand(ITarget target, DamageInfo damageInfo)
+        public DamageCommand(IHealthController target, DamageInfo damageInfo)
         {
             this.target = target;
             this.damageInfo = damageInfo;
@@ -17,7 +16,7 @@ namespace Core.GameCommand.Commands
 
         public void Execute()
         {
-            target.Damage(damageInfo);
+            target.TakeDamage(damageInfo);
         }
     }
 }

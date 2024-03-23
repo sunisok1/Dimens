@@ -1,7 +1,6 @@
 using Classes.Maps;
-using Core.Entities;
+using Core.Entities.Controller;
 using Core.Entities.EntityFactory;
-using Core.Maps;
 using UnityEngine;
 
 namespace Core.Manager
@@ -12,13 +11,16 @@ namespace Core.Manager
         private void Start()
         {
             var mapGenerator = GetComponent<IMapGenerator>();
-            var gameMap = mapGenerator.GenerateMap();
-            PlayerFactory playerFactory = new(gameMap);
+            var map = mapGenerator.GenerateMap();
+            PlayerFactory playerFactory = new(map);
 
             var players = new Player[9];
             for (var i = 0; i < players.Length; i++)
             {
-                players[i] = playerFactory.CreatePlayer($"player_{i}", 100, 100);
+                if (!map.GetUnoccupiedPosition(out var pos)) return;
+
+                players[i] = playerFactory.CreateEntity($"player_{i}", pos);
+                players[i].SetInfo(100,100);
             }
 
             var turnSystem = new TurnSystem(players);

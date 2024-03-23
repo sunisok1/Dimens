@@ -1,10 +1,8 @@
 ﻿using System;
 using Classes;
 using Common;
-using Core.Entities;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using EventSystem = Common.EventSystem;
 
 namespace Core.Cards.View
 {

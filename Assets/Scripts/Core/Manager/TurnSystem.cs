@@ -2,8 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Common;
-using Core.Entities;
-using UnityEngine;
+using Core.Entities.Controller;
 
 namespace Core.Manager
 {
@@ -24,17 +23,18 @@ namespace Core.Manager
         {
             SwitchToSpecificPlayer(playersLinkedList.First.Value);
 
-            while (playersLinkedList.Count >= 2)
-            {
-                yield return new WaitForSeconds(1);
-                Player player = currentPlayerNode.Value;
-
-                player.DrawCards(3);
-                yield return player.Play();
-                player.EndTurn();
-
-                SwitchToNextPlayer();
-            }
+            // while (playersLinkedList.Count >= 2)
+            // {
+            //     yield return new WaitForSeconds(1);
+            //     Player player = currentPlayerNode.Value;
+            //
+            //     player.DrawCards(3);
+            //     yield return player.Play();
+            //     player.EndTurn();
+            //
+            //     SwitchToNextPlayer();
+            // }
+            yield break;
         }
 
         private void SwitchToNextPlayer()
