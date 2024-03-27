@@ -27,7 +27,7 @@ namespace Core.Cards.View
         private void SetCardInfo(SlayTheSpireCard card)
         {
             cardImage.sprite = Resources.Load<Sprite>(card.portrait);
-            cardNameText.text = card.name;
+            cardNameText.text = card.Name;
             cardTypeText.text = card.type.ToString();
         }
     }

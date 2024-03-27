@@ -17,9 +17,9 @@ namespace Core.Cards.Model.Red
         }
 
 
-        public override void Use(IUserController userController, IHealthController target)
+        public override void Use(IUserController user, IHealthController target)
         {
-            CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(userController, 6)));
+            CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, 6)));
             // ActionManager.AddAction(new DamageAction(target, new DamageInfo(user, 6)));
         }
 

@@ -5,7 +5,7 @@ namespace Classes
     public abstract class AbstractCard
     {
         public readonly string originalName;
-        public string name { get; private set; }
+        public string Name { get; protected set; }
         public readonly string cardID;
         public readonly string portrait;
         public readonly string rawDescription;
@@ -14,12 +14,12 @@ namespace Classes
         {
             this.originalName = name;
             this.cardID = cardID;
-            this.name = name;
+            this.Name = name;
 
             this.portrait = portrait;
             this.rawDescription = rawDescription;
         }
 
-        public abstract void Use(IUserController userController, IHealthController target);
+        public abstract void Use(IUserController user, IHealthController target);
     }
 }
