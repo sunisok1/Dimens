@@ -1,5 +1,4 @@
-﻿using Classes.Entities.Controller;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Classes.Entities.Factory
 {

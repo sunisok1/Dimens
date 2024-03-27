@@ -1,5 +1,5 @@
 ﻿
-     using Classes.Entities.Controller;
+     using Classes.Entities;
 
      namespace Classes
      {

@@ -1,13 +1,13 @@
-﻿using Common;
-using System;
+﻿using System;
 using Classes;
-using Classes.Entities.Controller;
+using Classes.Entities;
+using Common;
 using Core.GameCommand;
 using Core.GameCommand.Commands;
 
-namespace Core.Cards.SlayTheSpire.Red
+namespace Core.Cards.Model.Red
 {
-    public class StrikeRed : RedCard
+    internal class StrikeRed : RedCard
     {
         public StrikeRed() : base("Strike_R", LocalizationManager.GetCardName("Strike_R"), "red/attack/strike", 1, LocalizationManager.GetCardDescription("Strike_R"), CardType.Attack, CardRarity.Basic, CardTarget.Enemy)
         {

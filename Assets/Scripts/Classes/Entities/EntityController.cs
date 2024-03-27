@@ -1,7 +1,7 @@
 ﻿using Classes.Entities.View;
 using UnityEngine;
 
-namespace Classes.Entities.Controller
+namespace Classes.Entities
 {
     public abstract class EntityController
     {

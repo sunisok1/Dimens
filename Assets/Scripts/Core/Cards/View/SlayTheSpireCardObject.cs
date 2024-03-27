@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Core.Cards.View
 {
     [Object("Card/SlayTheSpireCardObject")]
-    public class SlayTheSpireCardObject : BaseObject
+    internal class SlayTheSpireCardObject : BaseObject
     {
         [SerializeField] private Image cardImage;
         [SerializeField] private TextMeshProUGUI cardNameText;

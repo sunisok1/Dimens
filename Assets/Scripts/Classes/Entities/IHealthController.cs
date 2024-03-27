@@ -1,4 +1,4 @@
-﻿namespace Classes.Entities.Controller
+﻿namespace Classes.Entities
 {
     public interface IHealthController
     {

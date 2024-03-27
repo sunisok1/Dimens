@@ -3,7 +3,7 @@ using Classes;
 
 namespace Core.Cards
 {
-    public class DiscardArgs : EventArgs
+    internal class DiscardArgs : EventArgs
     {
         public AbstractCard card;
     }

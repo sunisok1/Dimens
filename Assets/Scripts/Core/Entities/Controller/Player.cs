@@ -1,5 +1,5 @@
 ﻿using Classes;
-using Classes.Entities.Controller;
+using Classes.Entities;
 using Core.Entities.View;
 using UnityEngine;
 

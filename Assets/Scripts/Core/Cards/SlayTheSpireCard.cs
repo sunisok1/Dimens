@@ -3,7 +3,7 @@ using Classes;
 
 namespace Core.Cards
 {
-    public enum CardTarget
+    internal enum CardTarget
     {
         Enemy,
         AllEnemy,
@@ -13,7 +13,7 @@ namespace Core.Cards
         All
     }
 
-    public enum CardColor
+    internal enum CardColor
     {
         Red,
         Green,
@@ -52,7 +52,7 @@ namespace Core.Cards
     }
 
 
-    public abstract class SlayTheSpireCard : AbstractCard
+    internal abstract class SlayTheSpireCard : AbstractCard
     {
         private const string PortraitsDirectory = "Slay the Spire/cards/";
 

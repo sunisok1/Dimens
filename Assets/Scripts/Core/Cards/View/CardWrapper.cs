@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 namespace Core.Cards.View
 {
     [Object("Card/CardWrapper")]
-    public class CardWrapper : BaseObject, IPointerClickHandler
+    internal sealed class CardWrapper : BaseObject, IPointerClickHandler
     {
         private AbstractCard card;
         private bool selected;
