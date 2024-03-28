@@ -74,6 +74,7 @@ namespace Core.Cards
         protected bool Upgraded { get; private set; }
         protected bool UpgradedDamage { get; private set; }
         protected bool UpgradedCost { get; private set; }
+        protected bool UpgradedMagicNumber { get; private set; }
 
         protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardRarity rarity, CardColor color, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
         {
@@ -120,7 +121,7 @@ namespace Core.Cards
             card.block = this.block;
             card.magicNumber = this.magicNumber;
             card.cost = this.cost;
-            // card.costForTurn = this.costForTurn;
+            card.costForTurn = this.costForTurn;
             // card.isCostModified = this.isCostModified;
             // card.isCostModifiedForTurn = this.isCostModifiedForTurn;
             // card.inBottleLightning = this.inBottleLightning;
@@ -131,6 +132,12 @@ namespace Core.Cards
             // card.misc = this.misc;
             // card.freeToPlayOnce = this.freeToPlayOnce;
             return card;
+        }
+
+        protected void UpgradeMagicNumber(int amount)
+        {
+            this.magicNumber += amount;
+            this.UpgradedMagicNumber = true;
         }
     }
 }

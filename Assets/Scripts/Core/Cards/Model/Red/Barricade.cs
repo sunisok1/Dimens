@@ -13,7 +13,7 @@ namespace Core.Cards.Model.Red
         private const string ID = "Barricade";
         private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
 
-        public Barricade() : base(ID, cardStrings.NAME, "red/attack/barricade", 3, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic, CardColor.Red, CardTarget.Self)
+        public Barricade() : base(ID, cardStrings.NAME, "red/power/barricade", 3, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic, CardColor.Red, CardTarget.Self)
         {
         }
 
