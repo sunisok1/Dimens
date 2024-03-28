@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Classes;
 
 namespace Core.Cards
@@ -69,8 +70,10 @@ namespace Core.Cards
         protected int discard = -1;
         protected readonly List<CardTags> tags = new();
         protected int timesUpgraded;
+        private int costForTurn;
         protected bool Upgraded { get; private set; }
         protected bool UpgradedDamage { get; private set; }
+        protected bool UpgradedCost { get; private set; }
 
         protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardRarity rarity, CardColor color, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
         {
@@ -95,6 +98,13 @@ namespace Core.Cards
         {
             damage += amount;
             UpgradedDamage = true;
+        }
+
+        protected void UpgradeCost(int newCost)
+        {
+            costForTurn = Math.Max(0, costForTurn + newCost - cost);
+            cost = newCost;
+            UpgradedCost = true;
         }
 
         public AbstractCard MakeStatEquivalentCopy()

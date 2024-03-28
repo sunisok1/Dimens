@@ -9,7 +9,7 @@ namespace Core.Cards.Model.Red
     internal class Armaments : SlayTheSpireCard
     {
         private const string ID = "Armaments";
-        private static readonly CardStrings cardStrings = LocalizationManager.GetCardStrings(ID);
+        private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
 
         public Armaments() : base(ID,cardStrings.NAME, "red/attack/armaments", 1, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic,CardColor.Red ,CardTarget.Self)
         {

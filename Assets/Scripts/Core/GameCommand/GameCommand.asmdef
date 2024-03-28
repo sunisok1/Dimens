@@ -2,7 +2,8 @@
     "name": "GameCommand",
     "rootNamespace": "",
     "references": [
-        "GUID:9b3c106950ad24d41a2be1007f026926"
+        "GUID:9b3c106950ad24d41a2be1007f026926",
+        "GUID:f975132c680343f4b7c3757963b90ca4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

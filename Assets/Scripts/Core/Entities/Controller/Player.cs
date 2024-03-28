@@ -1,11 +1,12 @@
 ﻿using Classes;
 using Classes.Entities;
 using Core.Entities.View;
+using Core.Powers;
 using UnityEngine;
 
 namespace Core.Entities.Controller
 {
-    public class Player : EntityController, IHealthController
+    public class Player : EntityController, IHealthController,IPowerCapable
     {
         private readonly PlayerModel model;
         private readonly PlayerView view;
@@ -40,6 +41,16 @@ namespace Core.Entities.Controller
         public void Die()
         {
             Object.Destroy(view);
+        }
+
+        public void AddPower(AbstractPower power)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool HasPower(string powerId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

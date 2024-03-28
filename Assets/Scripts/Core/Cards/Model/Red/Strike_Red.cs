@@ -10,7 +10,7 @@ namespace Core.Cards.Model.Red
     internal class StrikeRed : SlayTheSpireCard
     {
         private const string ID = "Strike_R";
-        private static readonly CardStrings cardStrings = LocalizationManager.GetCardStrings(ID);
+        private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
 
         public StrikeRed() : base(ID, cardStrings.NAME, "red/attack/strike", 1, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic, CardColor.Red, CardTarget.Enemy)
         {

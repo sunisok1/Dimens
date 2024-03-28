@@ -10,7 +10,7 @@ namespace Core.Cards.Model.Red
     internal class Anger : SlayTheSpireCard
     {
         private const string ID = "Anger";
-        private static readonly CardStrings cardStrings = LocalizationManager.GetCardStrings(ID);
+        private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
         public Anger() : base(ID, cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic,CardColor.Red, CardTarget.Enemy)
         {
             base.damage = 6;
