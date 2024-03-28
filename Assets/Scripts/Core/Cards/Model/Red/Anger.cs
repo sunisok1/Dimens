@@ -7,30 +7,32 @@ using Core.GameCommand.Commands;
 
 namespace Core.Cards.Model.Red
 {
-    internal class Anger : SlayTheSpireCard
+    internal class Anger : SlayTheSpireCard, IDamageCard
     {
         private const string ID = "Anger";
         private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
-        public Anger() : base(ID, cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic,CardColor.Red, CardTarget.Enemy)
+        public int Damage { get; private set; }
+
+        public Anger() : base(ID, cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic, CardColor.Red, CardTarget.Enemy)
         {
-            base.damage = 6;
+            Damage = 6;
         }
 
         public override void Upgrade()
         {
-            base.Upgrade();
-            UpgradeDamage(2);
+            UpgradeName();
+            Damage += 2;
         }
 
-        public override AbstractCard MakeCopy()
+        protected override AbstractCard MakeCopy()
         {
             return new Anger();
         }
 
         public override void Use(IUserController user, IHealthController target)
         {
-            CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, damage)));
-            CommandInvoker.ExecuteCommand(new MakeTempCardInDiscardAction(MakeStatEquivalentCopy, 1));
+            CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, Damage)));
+            CommandInvoker.ExecuteCommand(new MakeTempCardInDiscardAction(MakeStatEquivalentCopy(this), 1));
         }
     }
 }

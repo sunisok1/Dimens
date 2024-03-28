@@ -53,7 +53,7 @@ namespace Core.Cards
     }
 
 
-    internal abstract class SlayTheSpireCard : AbstractCard
+    internal abstract class SlayTheSpireCard : AbstractCard, IUpgradeable
     {
         private const string PortraitsDirectory = "Slay the Spire/cards/";
 
@@ -62,19 +62,10 @@ namespace Core.Cards
         protected CardRarity rarity;
         protected CardColor color;
         protected CardTarget target;
-        protected int damage = -1;
-        protected int block = -1;
-        protected int magicNumber = -1;
-        protected int heal = -1;
-        protected int draw = -1;
-        protected int discard = -1;
         protected readonly List<CardTags> tags = new();
-        protected int timesUpgraded;
-        private int costForTurn;
+        public int TimesUpgraded { get; set; }
+        protected int costForTurn;
         protected bool Upgraded { get; private set; }
-        protected bool UpgradedDamage { get; private set; }
-        protected bool UpgradedCost { get; private set; }
-        protected bool UpgradedMagicNumber { get; private set; }
 
         protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardRarity rarity, CardColor color, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
         {
@@ -85,59 +76,15 @@ namespace Core.Cards
             this.target = target;
         }
 
-        public abstract AbstractCard MakeCopy();
 
-        public virtual void Upgrade()
+        public abstract void Upgrade();
+
+        public void UpgradeName()
         {
-            timesUpgraded++;
+            TimesUpgraded++;
             Upgraded = true;
             Name += "+";
             // initializeTitle();
-        }
-
-        protected void UpgradeDamage(int amount)
-        {
-            damage += amount;
-            UpgradedDamage = true;
-        }
-
-        protected void UpgradeCost(int newCost)
-        {
-            costForTurn = Math.Max(0, costForTurn + newCost - cost);
-            cost = newCost;
-            UpgradedCost = true;
-        }
-
-        public AbstractCard MakeStatEquivalentCopy()
-        {
-            if (MakeCopy() is not SlayTheSpireCard card) return default;
-            for (int i = 0; i < this.timesUpgraded; i++)
-                card.Upgrade();
-            card.Name = this.Name;
-            card.target = this.target;
-            card.Upgraded = this.Upgraded;
-            card.timesUpgraded = this.timesUpgraded;
-            card.damage = this.damage;
-            card.block = this.block;
-            card.magicNumber = this.magicNumber;
-            card.cost = this.cost;
-            card.costForTurn = this.costForTurn;
-            // card.isCostModified = this.isCostModified;
-            // card.isCostModifiedForTurn = this.isCostModifiedForTurn;
-            // card.inBottleLightning = this.inBottleLightning;
-            // card.inBottleFlame = this.inBottleFlame;
-            // card.inBottleTornado = this.inBottleTornado;
-            // card.isSeen = this.isSeen;
-            // card.isLocked = this.isLocked;
-            // card.misc = this.misc;
-            // card.freeToPlayOnce = this.freeToPlayOnce;
-            return card;
-        }
-
-        protected void UpgradeMagicNumber(int amount)
-        {
-            this.magicNumber += amount;
-            this.UpgradedMagicNumber = true;
         }
     }
 }

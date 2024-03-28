@@ -1,4 +1,5 @@
-﻿using Classes;
+﻿using System;
+using Classes;
 using Classes.Entities;
 using Common;
 using Core.GameCommand;
@@ -19,11 +20,12 @@ namespace Core.Cards.Model.Red
 
         public override void Upgrade()
         {
-            base.Upgrade();
-            UpgradeCost(2);
+            UpgradeName();
+            costForTurn = Math.Max(0, costForTurn + 2 - cost);
+            cost = 2;
         }
 
-        public override AbstractCard MakeCopy()
+        protected override AbstractCard MakeCopy()
         {
             return new Barricade();
         }

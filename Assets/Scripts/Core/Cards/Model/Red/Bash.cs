@@ -7,17 +7,18 @@ using Core.GameCommand.Commands;
 
 namespace Core.Cards.Model.Red
 {
-    internal class Bash : SlayTheSpireCard
+    internal class Bash : SlayTheSpireCard, IMagicCard, IDamageCard
     {
         private const string ID = "Strike_R";
         private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
+        public int Damage { get; private set; }
+        public int MagicNumber { get; private set; }
 
         public Bash() : base(ID, cardStrings.NAME, "red/attack/bash", 2, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic, CardColor.Red, CardTarget.Enemy)
         {
-            damage = 8;
-            magicNumber = 2;
+            Damage = 8;
+            MagicNumber = 2;
         }
-
 
         public override void Use(IUserController user, IHealthController target)
         {
@@ -26,12 +27,12 @@ namespace Core.Cards.Model.Red
 
         public override void Upgrade()
         {
-            base.Upgrade();
-            UpgradeDamage(2);
-            UpgradeMagicNumber(1);
+            UpgradeName();
+            Damage += 2;
+            this.MagicNumber += 1;
         }
 
-        public override AbstractCard MakeCopy()
+        protected override AbstractCard MakeCopy()
         {
             return new Bash();
         }

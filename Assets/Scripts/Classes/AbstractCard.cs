@@ -21,5 +21,18 @@ namespace Classes
         }
 
         public abstract void Use(IUserController user, IHealthController target);
+        protected abstract AbstractCard MakeCopy();
+
+        protected static AbstractCard MakeStatEquivalentCopy(AbstractCard card)
+        {
+            AbstractCard copy = card.MakeCopy();
+            if (card is IUpgradeable upgradeable && copy is IUpgradeable copyUpgradeable)
+            {
+                for (var i = 0; i < upgradeable.TimesUpgraded; i++)
+                    copyUpgradeable.Upgrade();
+            }
+
+            return card;
+        }
     }
 }
