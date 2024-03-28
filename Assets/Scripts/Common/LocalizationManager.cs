@@ -17,20 +17,16 @@ namespace Common
             cardStringsMap = JsonConvert.DeserializeObject<Dictionary<string, CardStrings>>(config.text);
         }
 
-        public static string GetCardName(string cardId)
+        public static CardStrings GetCardStrings(string cardId)
         {
-            return cardStringsMap[cardId].NAME;
+            return cardStringsMap[cardId];
         }
+    }
 
-        public static string GetCardDescription(string cardId)
-        {
-            return cardStringsMap[cardId].DESCRIPTION;
-        }
-
-        private class CardStrings
-        {
-            public string NAME;
-            public string DESCRIPTION;
-        }
+    public class CardStrings
+    {
+        public string NAME;
+        public string DESCRIPTION;
+        public string UPGRADE_DESCRIPTION;
     }
 }

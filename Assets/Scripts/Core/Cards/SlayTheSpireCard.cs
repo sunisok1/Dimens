@@ -56,16 +56,21 @@ namespace Core.Cards
     {
         private const string PortraitsDirectory = "Slay the Spire/cards/";
 
-        public CardType type;
-        public int cost;
-        public CardRarity rarity;
-        public CardColor color;
-        public CardTarget target;
-        public int baseDamage = -1, baseBlock = -1, baseMagicNumber = -1, baseHeal = -1, baseDraw = -1, baseDiscard = -1;
-        public readonly List<CardTags> tags = new();
-        private int timesUpgraded;
-        private bool upgraded;
-        public bool UpgradedDamage { get; private set; }
+        public readonly CardType type;
+        protected int cost;
+        protected CardRarity rarity;
+        protected CardColor color;
+        protected CardTarget target;
+        protected int damage = -1;
+        protected int block = -1;
+        protected int magicNumber = -1;
+        protected int heal = -1;
+        protected int draw = -1;
+        protected int discard = -1;
+        protected readonly List<CardTags> tags = new();
+        protected int timesUpgraded;
+        protected bool Upgraded { get; private set; }
+        protected bool UpgradedDamage { get; private set; }
 
         protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardRarity rarity, CardColor color, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
         {
@@ -81,14 +86,14 @@ namespace Core.Cards
         public virtual void Upgrade()
         {
             timesUpgraded++;
-            upgraded = true;
+            Upgraded = true;
             Name += "+";
             // initializeTitle();
         }
 
         protected void UpgradeDamage(int amount)
         {
-            baseDamage += amount;
+            damage += amount;
             UpgradedDamage = true;
         }
 
@@ -99,11 +104,11 @@ namespace Core.Cards
                 card.Upgrade();
             card.Name = this.Name;
             card.target = this.target;
-            card.upgraded = this.upgraded;
+            card.Upgraded = this.Upgraded;
             card.timesUpgraded = this.timesUpgraded;
-            card.baseDamage = this.baseDamage;
-            card.baseBlock = this.baseBlock;
-            card.baseMagicNumber = this.baseMagicNumber;
+            card.damage = this.damage;
+            card.block = this.block;
+            card.magicNumber = this.magicNumber;
             card.cost = this.cost;
             // card.costForTurn = this.costForTurn;
             // card.isCostModified = this.isCostModified;

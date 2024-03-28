@@ -1,12 +1,11 @@
-﻿using System;
+using System;
 using Classes;
-using CodiceApp.EventTracking.Plastic;
 
 namespace Core.GameCommand.Commands
 {
-    public class MakeTempCardInDiscardAction : ICommand
+    public class ArmamentsAction : ICommand
     {
-        public MakeTempCardInDiscardAction(TrackEvent.Func<AbstractCard> makeStatEquivalentCopy, int i)
+        public ArmamentsAction(bool upgraded)
         {
             throw new NotImplementedException();
         }

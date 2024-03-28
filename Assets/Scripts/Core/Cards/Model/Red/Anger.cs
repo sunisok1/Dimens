@@ -7,13 +7,13 @@ using Core.GameCommand.Commands;
 
 namespace Core.Cards.Model.Red
 {
-    internal class Anger : RedCard
+    internal class Anger : SlayTheSpireCard
     {
         private const string ID = "Anger";
-
-        public Anger() : base(ID, LocalizationManager.GetCardName(ID), "red/attack/A", 0, LocalizationManager.GetCardDescription(ID), CardType.Attack, CardRarity.Basic, CardTarget.Enemy)
+        private static readonly CardStrings cardStrings = LocalizationManager.GetCardStrings(ID);
+        public Anger() : base(ID, cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic,CardColor.Red, CardTarget.Enemy)
         {
-            base.baseDamage = 6;
+            base.damage = 6;
         }
 
         public override void Upgrade()
@@ -29,10 +29,8 @@ namespace Core.Cards.Model.Red
 
         public override void Use(IUserController user, IHealthController target)
         {
-            CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, baseDamage)));
+            CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, damage)));
             CommandInvoker.ExecuteCommand(new MakeTempCardInDiscardAction(MakeStatEquivalentCopy, 1));
         }
     }
-
-   
 }

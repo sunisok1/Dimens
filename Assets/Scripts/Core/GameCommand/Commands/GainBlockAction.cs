@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using Classes;
-using CodiceApp.EventTracking.Plastic;
+using Classes.Entities;
 
 namespace Core.GameCommand.Commands
 {
-    public class MakeTempCardInDiscardAction : ICommand
+    public class GainBlockAction : ICommand
     {
-        public MakeTempCardInDiscardAction(TrackEvent.Func<AbstractCard> makeStatEquivalentCopy, int i)
+        public GainBlockAction(IUserController user, IUserController userController, int block)
         {
             throw new NotImplementedException();
         }

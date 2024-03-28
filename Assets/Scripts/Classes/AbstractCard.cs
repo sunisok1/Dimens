@@ -8,7 +8,7 @@ namespace Classes
         public string Name { get; protected set; }
         public readonly string cardID;
         public readonly string portrait;
-        public readonly string rawDescription;
+        public string rawDescription;
 
         protected AbstractCard(string cardID, string name, string portrait, string rawDescription)
         {

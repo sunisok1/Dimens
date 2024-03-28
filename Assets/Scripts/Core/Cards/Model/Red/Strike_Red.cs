@@ -7,11 +7,14 @@ using Core.GameCommand.Commands;
 
 namespace Core.Cards.Model.Red
 {
-    internal class StrikeRed : RedCard
+    internal class StrikeRed : SlayTheSpireCard
     {
-        public StrikeRed() : base("Strike_R", LocalizationManager.GetCardName("Strike_R"), "red/attack/strike", 1, LocalizationManager.GetCardDescription("Strike_R"), CardType.Attack, CardRarity.Basic, CardTarget.Enemy)
+        private const string ID = "Strike_R";
+        private static readonly CardStrings cardStrings = LocalizationManager.GetCardStrings(ID);
+
+        public StrikeRed() : base(ID, cardStrings.NAME, "red/attack/strike", 1, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic, CardColor.Red, CardTarget.Enemy)
         {
-            baseDamage = 6;
+            damage = 6;
             tags.Add(CardTags.Strike);
             tags.Add(CardTags.StarterStrike);
         }
@@ -20,7 +23,6 @@ namespace Core.Cards.Model.Red
         public override void Use(IUserController user, IHealthController target)
         {
             CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, 6)));
-            // ActionManager.AddAction(new DamageAction(target, new DamageInfo(user, 6)));
         }
 
         public override void Upgrade()
