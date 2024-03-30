@@ -7,7 +7,7 @@ using Core.GameCommand.Commands;
 using Core.Powers;
 using Core.Powers.Model;
 
-namespace Core.Cards.Model.Red
+namespace Cards.SlayTheSpire.Model.Red
 {
     internal class Barricade : SlayTheSpireCard
     {

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Classes;
 
-namespace Core.Cards
+namespace Cards
 {
     internal enum CardTarget
     {

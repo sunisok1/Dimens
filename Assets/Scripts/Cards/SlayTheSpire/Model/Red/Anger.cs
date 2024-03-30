@@ -1,11 +1,10 @@
-﻿using System;
-using Classes;
+﻿using Classes;
 using Classes.Entities;
 using Common;
 using Core.GameCommand;
 using Core.GameCommand.Commands;
 
-namespace Core.Cards.Model.Red
+namespace Cards.SlayTheSpire.Model.Red
 {
     internal class Anger : SlayTheSpireCard, IDamageCard
     {

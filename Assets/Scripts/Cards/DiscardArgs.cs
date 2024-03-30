@@ -1,7 +1,7 @@
 ﻿using System;
 using Classes;
 
-namespace Core.Cards
+namespace Cards
 {
     internal class DiscardArgs : EventArgs
     {

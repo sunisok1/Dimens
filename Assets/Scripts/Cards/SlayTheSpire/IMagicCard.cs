@@ -1,4 +1,4 @@
-﻿namespace Core.Cards.Model.Red
+﻿namespace Cards.SlayTheSpire
 {
     internal interface IMagicCard
     {

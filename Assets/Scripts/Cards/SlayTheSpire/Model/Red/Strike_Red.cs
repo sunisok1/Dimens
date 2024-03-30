@@ -5,7 +5,7 @@ using Common;
 using Core.GameCommand;
 using Core.GameCommand.Commands;
 
-namespace Core.Cards.Model.Red
+namespace Cards.SlayTheSpire.Model.Red
 {
     internal class StrikeRed : SlayTheSpireCard, IDamageCard
     {

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Core.Cards.View
+namespace Cards.SlayTheSpire.View
 {
     [Object("Card/SlayTheSpireCardObject")]
     internal class SlayTheSpireCardObject : BaseObject

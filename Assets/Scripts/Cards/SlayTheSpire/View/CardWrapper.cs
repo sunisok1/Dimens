@@ -4,7 +4,7 @@ using Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Core.Cards.View
+namespace Cards.SlayTheSpire.View
 {
     [Object("Card/CardWrapper")]
     internal sealed class CardWrapper : BaseObject, IPointerClickHandler
