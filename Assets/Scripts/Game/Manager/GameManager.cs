@@ -1,4 +1,4 @@
-using Classes.Core.Maps;
+using Core.Maps;
 using Game.Entities.Controller;
 using Game.Entities.EntityFactory;
 using UnityEngine;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Classes.Core.Entities
+namespace Core.Entities
 {
     public abstract class AbstractEntityModel
     {

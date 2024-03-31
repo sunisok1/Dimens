@@ -1,4 +1,4 @@
-﻿namespace Classes.Core.Entities
+﻿namespace Core
 {
     public interface IUserController
     {

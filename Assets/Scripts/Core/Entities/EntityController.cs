@@ -1,7 +1,7 @@
-﻿using Classes.Core.Entities.View;
+﻿using Core.Entities.View;
 using UnityEngine;
 
-namespace Classes.Core.Entities
+namespace Core.Entities
 {
     public abstract class EntityController
     {

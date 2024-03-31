@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Classes.Core
+namespace Core
 {
     public interface IMovable
     {

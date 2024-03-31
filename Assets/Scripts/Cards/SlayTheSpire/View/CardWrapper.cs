@@ -1,7 +1,6 @@
 ﻿using System;
-using Classes;
-using Classes.Core;
 using Common;
+using Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -25,7 +24,7 @@ namespace Cards.SlayTheSpire.View
                 rectTransform = transform as RectTransform;
                 switch (card)
                 {
-                    case SlayTheSpireCard slayTheSpireCard:
+                    case AbstractSlayTheSpireCard slayTheSpireCard:
                         ObjectManager.Create<SlayTheSpireCardObject>(transform, slayTheSpireCard);
 
                         break;

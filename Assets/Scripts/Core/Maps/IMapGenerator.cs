@@ -1,4 +1,4 @@
-﻿namespace Classes.Core.Maps
+﻿namespace Core.Maps
 {
     public interface IMapGenerator
     {

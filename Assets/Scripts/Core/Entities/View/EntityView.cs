@@ -1,7 +1,7 @@
 ﻿using Common;
 using UnityEngine;
 
-namespace Classes.Core.Entities.View
+namespace Core.Entities.View
 {
     public abstract class EntityView : BaseObject
     {

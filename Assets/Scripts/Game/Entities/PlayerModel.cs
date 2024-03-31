@@ -1,4 +1,4 @@
-﻿using Classes.Core.Entities;
+﻿using Core.Entities;
 using UnityEngine;
 
 namespace Game.Entities

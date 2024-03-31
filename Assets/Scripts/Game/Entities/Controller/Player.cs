@@ -1,5 +1,5 @@
-﻿using Classes.Core;
-using Classes.Core.Entities;
+﻿using Core;
+using Core.Entities;
 using Game.Entities.View;
 using UnityEngine;
 

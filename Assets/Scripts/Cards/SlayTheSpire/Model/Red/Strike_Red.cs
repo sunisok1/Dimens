@@ -1,14 +1,12 @@
 ﻿using System;
-using Classes;
-using Classes.Core;
-using Classes.Core.Entities;
 using Common;
+using Core;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class StrikeRed : SlayTheSpireCard, IDamageCard
+    internal class StrikeRed : AbstractSlayTheSpireCard, IDamageCard
     {
         private const string ID = "Strike_R";
         private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);

@@ -1,7 +1,7 @@
 ﻿using System;
-using Classes.Core.Entities;
-using Classes.Core.Entities.View;
 using Common;
+using Core.Entities;
+using Core.Entities.View;
 using TMPro;
 using UnityEngine;
 

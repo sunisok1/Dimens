@@ -1,6 +1,4 @@
-﻿using Classes.Core.Entities;
-
-namespace Classes.Core
+﻿namespace Core
 {
     public abstract class AbstractCard
     {

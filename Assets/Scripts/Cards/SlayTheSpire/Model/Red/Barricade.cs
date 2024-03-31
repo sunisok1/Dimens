@@ -1,15 +1,13 @@
 ﻿using System;
-using Classes;
-using Classes.Core;
-using Classes.Core.Entities;
 using Common;
+using Core;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 using Game.Powers.Model;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class Barricade : SlayTheSpireCard
+    internal class Barricade : AbstractSlayTheSpireCard
     {
         private const string ID = "Barricade";
         private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);

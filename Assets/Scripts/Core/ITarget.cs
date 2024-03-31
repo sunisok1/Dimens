@@ -1,4 +1,4 @@
-﻿namespace Classes.Core
+﻿namespace Core
 {
     public interface ITarget
     {

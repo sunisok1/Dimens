@@ -1,6 +1,6 @@
-﻿using Classes.Core.Entities.Factory;
-using Classes.Core.Maps;
-using Common;
+﻿using Common;
+using Core.Entities.Factory;
+using Core.Maps;
 using Game.Entities.Controller;
 using Game.Entities.View;
 using UnityEngine;

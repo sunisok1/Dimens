@@ -1,5 +1,5 @@
 ﻿using System;
-using Classes.Core;
+using Core;
 
 namespace Game.GameCommand.Commands
 {

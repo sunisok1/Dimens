@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Classes.Core.Entities.Factory
+namespace Core.Entities.Factory
 {
     public interface IEntityFactory<out T> where T : EntityController
     {

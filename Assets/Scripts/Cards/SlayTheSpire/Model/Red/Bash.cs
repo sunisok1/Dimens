@@ -1,13 +1,11 @@
-﻿using Classes;
-using Classes.Core;
-using Classes.Core.Entities;
-using Common;
+﻿using Common;
+using Core;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class Bash : SlayTheSpireCard, IMagicCard, IDamageCard
+    internal class Bash : AbstractSlayTheSpireCard, IMagicCard, IDamageCard
     {
         private const string ID = "Strike_R";
         private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using Classes;
-using Classes.Core;
+using Core;
 
 namespace Cards
 {
@@ -53,7 +52,7 @@ namespace Cards
     }
 
 
-    internal abstract class SlayTheSpireCard : AbstractCard, IUpgradeable
+    public abstract class AbstractSlayTheSpireCard : AbstractCard, IUpgradeable
     {
         private const string PortraitsDirectory = "Slay the Spire/cards/";
 
@@ -67,7 +66,7 @@ namespace Cards
         protected int costForTurn;
         protected bool Upgraded { get; private set; }
 
-        protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardColor color, CardRarity rarity, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
+        protected AbstractSlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardColor color, CardRarity rarity, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
         {
             this.type = type;
             this.cost = cost;

@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Classes.Core.Maps
+namespace Core.Maps
 {
     public abstract class AbstractMap
     {

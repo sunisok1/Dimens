@@ -1,18 +1,16 @@
-﻿using Cards.SlayTheSpire.Model.Red.Core.GameCommand.Commands;
-using Cards.SlayTheSpire.Model.Red.Core.Powers.Model;
-using Classes.Core;
-using Classes.Core.Entities;
-using Common;
+﻿using Common;
+using Core;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
+using Game.Powers.Model;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class BattleTrance : SlayTheSpireCard, IMagicCard
+    internal class BattleTrance : AbstractSlayTheSpireCard, IMagicCard
     {
         private const string ID = "Battle Trance";
         private static CardStrings cardStrings;
-        public int MagicNumber { get; }
+        public int MagicNumber { get; private set; }
 
         public BattleTrance() : base(ID, cardStrings.NAME, "red/skill/battle_trance", 0, cardStrings.DESCRIPTION, CardType.Skill, CardColor.Red, CardRarity.Uncommon, CardTarget.Self)
         {
@@ -27,40 +25,12 @@ namespace Cards.SlayTheSpire.Model.Red
 
         protected override AbstractCard MakeCopy()
         {
-            throw new System.NotImplementedException();
+            return new BattleTrance();
         }
 
         public override void Upgrade()
         {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    namespace Core.GameCommand.Commands
-
-    {
-        internal class DrawCardAction : ICommand
-        {
-            public DrawCardAction(IUserController source, int amount)
-            {
-            }
-
-            public void Execute()
-            {
-            }
-        }
-    }
-
-    namespace Core.Powers.Model
-    {
-        internal class NoDrawPower : AbstractPower
-        {
-            public const string ID = "No Draw";
-            private static PowerStrings powerStrings = LocalizedStrings.GetPowerStrings(ID);
-
-            public NoDrawPower(IUserController user) : base(ID, powerStrings.NAME, "red/attack/strike", powerStrings.DESCRIPTIONS)
-            {
-            }
+            MagicNumber++;
         }
     }
 }

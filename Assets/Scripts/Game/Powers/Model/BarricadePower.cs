@@ -1,5 +1,5 @@
-﻿using Classes.Core;
-using Common;
+﻿using Common;
+using Core;
 
 namespace Game.Powers.Model
 {

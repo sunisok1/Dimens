@@ -1,4 +1,4 @@
-﻿using Classes.Core.Maps;
+﻿using Core.Maps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 

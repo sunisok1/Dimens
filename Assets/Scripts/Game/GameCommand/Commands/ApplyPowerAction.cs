@@ -1,5 +1,4 @@
-using Classes.Core;
-using Classes.Core.Entities;
+using Core;
 
 namespace Game.GameCommand.Commands
 {
