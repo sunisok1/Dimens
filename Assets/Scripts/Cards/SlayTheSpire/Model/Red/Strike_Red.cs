@@ -1,15 +1,16 @@
 ﻿using System;
 using Common;
 using Core;
+using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class StrikeRed : AbstractSlayTheSpireCard, IDamageCard
+    internal class StrikeRed : SlayTheSpireCard, IDamageCard
     {
         private const string ID = "Strike_R";
-        private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
+        private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
         public int Damage { get; private set; }
 
         public StrikeRed() : base(ID, cardStrings.NAME, "red/attack/strike", 1, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Basic, CardTarget.Enemy)

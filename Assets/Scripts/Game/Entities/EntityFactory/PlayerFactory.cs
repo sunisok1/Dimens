@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.Entities.EntityFactory
 {
-    public class PlayerFactory : IEntityFactory<Player>
+    public class PlayerFactory : IEntityFactory<PlayerController>
     {
         private readonly AbstractMap map;
 
@@ -16,11 +16,11 @@ namespace Game.Entities.EntityFactory
             this.map = map;
         }
 
-        public Player CreateEntity(string name, Vector3Int position)
+        public PlayerController CreateEntity(string name, Vector3Int position)
         {
             var playerModel = new PlayerModel(name, position);
             var playerView = ObjectManager.Create<PlayerView>(map.GetContent(), playerModel);
-            return new Player(playerModel, playerView);
+            return new PlayerController(playerModel, playerView);
         }
     }
 }

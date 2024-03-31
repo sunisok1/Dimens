@@ -4,18 +4,18 @@ using UnityEngine.Tilemaps;
 
 namespace Game.Maps.MapGenerator
 {
-    public class UltraFlatMapGenerator : MonoBehaviour, IMapGenerator
+    public class UltraFlatMapGenerator : AbstractMapGenerator
     {
-        [SerializeField] private int Width = 10;
-        [SerializeField] private int Height = 10;
+        [SerializeField] private int width = 10;
+        [SerializeField] private int height = 10;
         [SerializeField] private Transform mapObjectPrefab;
         [SerializeField] private Tile tile;
 
 
-        public AbstractMap GenerateMap()
+        public override AbstractMap GenerateMap()
         {
             Transform mapInstance = Instantiate(mapObjectPrefab);
-            var ultraFlatMap = new UltraFlatMap(mapInstance, tile, Width, Height);
+            var ultraFlatMap = new UltraFlatMap(mapInstance, tile, width, height);
             return ultraFlatMap;
         }
     }

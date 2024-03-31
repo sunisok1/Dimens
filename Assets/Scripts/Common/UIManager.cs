@@ -22,6 +22,11 @@ namespace Common
             else
             {
                 canvas = gameObject.GetComponent<Canvas>();
+                BaseUI[] uis = canvas.GetComponentsInChildren<BaseUI>();
+                foreach (BaseUI ui in uis)
+                {
+                    uiDictionary.TryAdd(ui.GetType(), ui);
+                }
             }
         }
 

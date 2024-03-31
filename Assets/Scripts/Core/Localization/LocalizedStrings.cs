@@ -1,32 +1,32 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine;
 
 // ReSharper disable InconsistentNaming
 
 // ReSharper disable ClassNeverInstantiated.Local
 
-namespace Common
+namespace Core.Localization
 {
-    public static class LocalizedStrings
+    public class LocalizedStrings
     {
         private const string path = "Slay the Spire/localization/zhs/";
-        private static readonly Dictionary<string, CardStrings> cardStringsMap;
-        private static readonly Dictionary<string, PowerStrings> powerStringsMap;
+        private readonly Dictionary<string, CardStrings> cardStringsMap;
+        private readonly Dictionary<string, PowerStrings> powerStringsMap;
 
-        static LocalizedStrings()
+        public LocalizedStrings()
         {
             cardStringsMap = JsonConvert.DeserializeObject<Dictionary<string, CardStrings>>(Resources.Load<TextAsset>(path + "cards").text);
             powerStringsMap = JsonConvert.DeserializeObject<Dictionary<string, PowerStrings>>(Resources.Load<TextAsset>(path + "powers").text);
         }
 
-        public static CardStrings GetCardStrings(string cardId)
+        public CardStrings GetCardStrings(string cardId)
         {
             return cardStringsMap[cardId];
         }
 
-        public static PowerStrings GetPowerStrings(string powerId)
+        public PowerStrings GetPowerStrings(string powerId)
         {
             return powerStringsMap.TryGetValue(powerId, out var strings) ? strings : PowerStrings.GetMockPowerString();
         }

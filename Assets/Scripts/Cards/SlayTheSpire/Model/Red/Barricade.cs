@@ -1,16 +1,17 @@
 ﻿using System;
 using Common;
 using Core;
+using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 using Game.Powers.Model;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class Barricade : AbstractSlayTheSpireCard
+    internal class Barricade : SlayTheSpireCard
     {
         private const string ID = "Barricade";
-        private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
+        private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
 
         public Barricade() : base(ID, cardStrings.NAME, "red/power/barricade", 3, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Basic, CardTarget.Self)
         {

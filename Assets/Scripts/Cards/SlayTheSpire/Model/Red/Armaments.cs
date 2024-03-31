@@ -1,14 +1,15 @@
 ﻿using Common;
 using Core;
+using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class Armaments : AbstractSlayTheSpireCard, IBlockCard
+    internal class Armaments : SlayTheSpireCard, IBlockCard
     {
         private const string ID = "Armaments";
-        private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
+        private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
         public int Block { get; private set; }
 
         public Armaments() : base(ID,cardStrings.NAME, "red/skill/armaments", 1, cardStrings.DESCRIPTION, CardType.Attack,CardColor.Red ,CardRarity.Basic, CardTarget.Self)

@@ -1,17 +1,18 @@
 ﻿using Common;
 using Core;
+using Core.Localization;
 
 namespace Game.Powers.Model
 {
     public class BarricadePower : AbstractPower
     {
         private const string ID = "Barricade";
-        private static readonly PowerStrings powerStrings = LocalizedStrings.GetPowerStrings("Barricade");
+        private static readonly PowerStrings powerStrings = CardCrawlGame.languagePack.GetPowerStrings("Barricade");
 
         public BarricadePower(ITarget owner) : base(ID, powerStrings.NAME, "barricade", powerStrings.DESCRIPTIONS)
         {
             this.owner = owner;
-            this.amount = -1;
+            amount = -1;
         }
     }
 }

@@ -1,12 +1,13 @@
 ﻿using Common;
 using Core;
+using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 using Game.Powers.Model;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class BattleTrance : AbstractSlayTheSpireCard, IMagicCard
+    internal class BattleTrance : SlayTheSpireCard, IMagicCard
     {
         private const string ID = "Battle Trance";
         private static CardStrings cardStrings;

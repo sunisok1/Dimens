@@ -16,7 +16,7 @@
 
         public DamageInfo(IUserController damageSource, int num, DamageType type = DamageType.Normal)
         {
-            this.owner = damageSource;
+            owner = damageSource;
             this.type = type;
             this.num = num;
         }

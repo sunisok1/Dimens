@@ -12,19 +12,19 @@ namespace Cards.SlayTheSpire.View
         [SerializeField] private TextMeshProUGUI cardNameText;
         [SerializeField] private TextMeshProUGUI cardTypeText;
 
-        private AbstractSlayTheSpireCard abstractSlayTheSpireCard;
+        private SlayTheSpireCard slayTheSpireCard;
 
         public override void OnCreated(params object[] objs)
         {
             base.OnCreated(objs);
-            if (objs.Length > 0 && objs[0] is AbstractSlayTheSpireCard card)
+            if (objs.Length > 0 && objs[0] is SlayTheSpireCard card)
             {
-                abstractSlayTheSpireCard = card;
-                SetCardInfo(abstractSlayTheSpireCard);
+                slayTheSpireCard = card;
+                SetCardInfo(slayTheSpireCard);
             }
         }
 
-        private void SetCardInfo(AbstractSlayTheSpireCard card)
+        private void SetCardInfo(SlayTheSpireCard card)
         {
             cardImage.sprite = Resources.Load<Sprite>(card.portrait);
             cardNameText.text = card.Name;

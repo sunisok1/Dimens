@@ -1,7 +1,9 @@
-﻿namespace Core.Maps
+﻿using UnityEngine;
+
+namespace Core.Maps
 {
-    public interface IMapGenerator
+    public abstract class AbstractMapGenerator : MonoBehaviour
     {
-        AbstractMap GenerateMap();
+        public abstract AbstractMap GenerateMap();
     }
 }

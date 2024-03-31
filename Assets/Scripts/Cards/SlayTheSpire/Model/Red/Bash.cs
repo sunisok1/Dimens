@@ -1,14 +1,15 @@
 ﻿using Common;
 using Core;
+using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
-    internal class Bash : AbstractSlayTheSpireCard, IMagicCard, IDamageCard
+    internal class Bash : SlayTheSpireCard, IMagicCard, IDamageCard
     {
         private const string ID = "Strike_R";
-        private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
+        private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
         public int Damage { get; private set; }
         public int MagicNumber { get; private set; }
 
@@ -27,7 +28,7 @@ namespace Cards.SlayTheSpire.Model.Red
         {
             UpgradeName();
             Damage += 2;
-            this.MagicNumber += 1;
+            MagicNumber += 1;
         }
 
         protected override AbstractCard MakeCopy()

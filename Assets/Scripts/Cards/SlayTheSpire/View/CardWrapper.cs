@@ -24,7 +24,7 @@ namespace Cards.SlayTheSpire.View
                 rectTransform = transform as RectTransform;
                 switch (card)
                 {
-                    case AbstractSlayTheSpireCard slayTheSpireCard:
+                    case SlayTheSpireCard slayTheSpireCard:
                         ObjectManager.Create<SlayTheSpireCardObject>(transform, slayTheSpireCard);
 
                         break;

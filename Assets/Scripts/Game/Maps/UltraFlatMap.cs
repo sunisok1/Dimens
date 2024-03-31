@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 namespace Game.Maps
 {
-    public class UltraFlatMap : AbstractMap
+    internal class UltraFlatMap : AbstractMap
     {
         private readonly Tilemap tilemap;
         private readonly Transform entityContent;

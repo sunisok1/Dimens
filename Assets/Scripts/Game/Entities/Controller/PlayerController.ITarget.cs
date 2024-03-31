@@ -1,26 +1,13 @@
 ﻿using Core;
-using Core.Entities;
-using Game.Entities.View;
 using UnityEngine;
 
 namespace Game.Entities.Controller
 {
-    public class Player : EntityController, ITarget
+    public partial class PlayerController : ITarget
     {
-        private readonly PlayerModel model;
-        private readonly PlayerView view;
-
-        public Player(PlayerModel model, PlayerView view) : base(model, view)
+        public void AddPower(AbstractPower power)
         {
-            this.model = model;
-            this.view = view;
-        }
-
-        public void SetInfo(int health, int maxHealth)
-        {
-            model.CurHealth = health;
-            model.MaxHealth = maxHealth;
-            view.UpdateHealth(model);
+            throw new System.NotImplementedException();
         }
 
         public void TakeDamage(DamageInfo damage)
@@ -40,11 +27,6 @@ namespace Game.Entities.Controller
         public void Die()
         {
             Object.Destroy(view);
-        }
-
-        public void AddPower(AbstractPower power)
-        {
-            throw new System.NotImplementedException();
         }
 
         public bool HasPower(string powerId)

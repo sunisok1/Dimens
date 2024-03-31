@@ -10,9 +10,9 @@
 
         protected AbstractCard(string cardID, string name, string portrait, string rawDescription)
         {
-            this.originalName = name;
+            originalName = name;
             this.cardID = cardID;
-            this.Name = name;
+            Name = name;
 
             this.portrait = portrait;
             this.rawDescription = rawDescription;
