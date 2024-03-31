@@ -1,5 +1,6 @@
 using System;
 using Classes;
+using Classes.Core;
 
 namespace Cards
 {

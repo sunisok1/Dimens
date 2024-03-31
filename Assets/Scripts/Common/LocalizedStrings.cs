@@ -17,8 +17,8 @@ namespace Common
 
         static LocalizedStrings()
         {
-            var config = Resources.Load<TextAsset>(path + "cards");
-            cardStringsMap = JsonConvert.DeserializeObject<Dictionary<string, CardStrings>>(config.text);
+            cardStringsMap = JsonConvert.DeserializeObject<Dictionary<string, CardStrings>>(Resources.Load<TextAsset>(path + "cards").text);
+            powerStringsMap = JsonConvert.DeserializeObject<Dictionary<string, PowerStrings>>(Resources.Load<TextAsset>(path + "powers").text);
         }
 
         public static CardStrings GetCardStrings(string cardId)

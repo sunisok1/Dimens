@@ -1,8 +1,9 @@
 ﻿using Classes;
-using Classes.Entities;
+using Classes.Core;
+using Classes.Core.Entities;
 using Common;
-using Core.GameCommand;
-using Core.GameCommand.Commands;
+using Game.GameCommand;
+using Game.GameCommand.Commands;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
@@ -12,7 +13,7 @@ namespace Cards.SlayTheSpire.Model.Red
         private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
         public int Damage { get; private set; }
 
-        public Anger() : base(ID, cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic, CardColor.Red, CardTarget.Enemy)
+        public Anger() : base(ID, cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Basic, CardTarget.Enemy)
         {
             Damage = 6;
         }
@@ -28,7 +29,7 @@ namespace Cards.SlayTheSpire.Model.Red
             return new Anger();
         }
 
-        public override void Use(IUserController user, IHealthController target)
+        public override void Use(IUserController user, ITarget target)
         {
             CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, Damage)));
             CommandInvoker.ExecuteCommand(new MakeTempCardInDiscardAction(MakeStatEquivalentCopy(this), 1));

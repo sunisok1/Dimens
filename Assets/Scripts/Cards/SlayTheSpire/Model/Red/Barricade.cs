@@ -1,11 +1,11 @@
 ﻿using System;
 using Classes;
-using Classes.Entities;
+using Classes.Core;
+using Classes.Core.Entities;
 using Common;
-using Core.GameCommand;
-using Core.GameCommand.Commands;
-using Core.Powers;
-using Core.Powers.Model;
+using Game.GameCommand;
+using Game.GameCommand.Commands;
+using Game.Powers.Model;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
@@ -14,7 +14,7 @@ namespace Cards.SlayTheSpire.Model.Red
         private const string ID = "Barricade";
         private static readonly CardStrings cardStrings = LocalizedStrings.GetCardStrings(ID);
 
-        public Barricade() : base(ID, cardStrings.NAME, "red/power/barricade", 3, cardStrings.DESCRIPTION, CardType.Attack, CardRarity.Basic, CardColor.Red, CardTarget.Self)
+        public Barricade() : base(ID, cardStrings.NAME, "red/power/barricade", 3, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Basic, CardTarget.Self)
         {
         }
 
@@ -30,11 +30,10 @@ namespace Cards.SlayTheSpire.Model.Red
             return new Barricade();
         }
 
-        public override void Use(IUserController user, IHealthController target)
+        public override void Use(IUserController user, ITarget target)
         {
-            if (target is not IPowerCapable powerCapable) return;
-            if (powerCapable.HasPower(ID)) return;
-            CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, powerCapable, new BarricadePower(powerCapable)));
+            if (target.HasPower(ID)) return;
+            CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, target, new BarricadePower(target)));
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Classes;
+using Classes.Core;
 
 namespace Cards
 {
-    internal enum CardTarget
+    public enum CardTarget
     {
         Enemy,
         AllEnemy,
@@ -13,7 +14,7 @@ namespace Cards
         All
     }
 
-    internal enum CardColor
+    public enum CardColor
     {
         Red,
         Green,
@@ -66,12 +67,12 @@ namespace Cards
         protected int costForTurn;
         protected bool Upgraded { get; private set; }
 
-        protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardRarity rarity, CardColor color, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
+        protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardColor color, CardRarity rarity, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
         {
             this.type = type;
             this.cost = cost;
-            this.rarity = rarity;
             this.color = color;
+            this.rarity = rarity;
             this.target = target;
         }
 
