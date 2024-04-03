@@ -462,6 +462,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1100336860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5297597309599248455, guid: bdca837a14f1ba24a97e0f9ef3094fea, type: 3}
+  m_PrefabInstance: {fileID: 252139214}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd205e214a641099f097fc1176370cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1214614622
 GameObject:
   m_ObjectHideFlags: 3
@@ -577,6 +588,51 @@ MonoBehaviour:
   height: 10
   mapObjectPrefab: {fileID: 182563953801054457, guid: 478c86f5b67d9f540af759fbecf88395, type: 3}
   tile: {fileID: 11400000, guid: a240fc65b9556344c9c20dbfc8f14eca, type: 2}
+--- !u!1 &1390436529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1390436530}
+  - component: {fileID: 1390436531}
+  m_Layer: 0
+  m_Name: TurnSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1390436530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390436529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1654507416}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1390436531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390436529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f98be60b190446292f5104a77f42909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnSystemView: {fileID: 1100336860}
 --- !u!1 &1654507415
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +664,7 @@ Transform:
   - {fileID: 2110530573}
   - {fileID: 2054054050}
   - {fileID: 1228153728}
+  - {fileID: 1390436530}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -709,6 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abstractMapGenerator: {fileID: 1228153729}
+  turnSystemController: {fileID: 1390436531}
 --- !u!4 &2054054050
 Transform:
   m_ObjectHideFlags: 0

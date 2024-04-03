@@ -1,5 +1,4 @@
-﻿using Common;
-using Core;
+﻿using Core;
 using Core.Localization;
 
 namespace Game.Powers.Model

@@ -14,7 +14,7 @@ namespace Game.Maps.MapGenerator
 
         public override AbstractMap GenerateMap()
         {
-            Transform mapInstance = Instantiate(mapObjectPrefab);
+            Transform mapInstance = Instantiate(mapObjectPrefab, transform);
             var ultraFlatMap = new UltraFlatMap(mapInstance, tile, width, height);
             return ultraFlatMap;
         }

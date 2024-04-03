@@ -1,5 +1,18 @@
-﻿namespace Core
+﻿using System;
+
+namespace Core.Card
 {
+    [AttributeUsage(AttributeTargets.Class)]
+    public class CardAttribute : Attribute
+    {
+        internal string Path { get; }
+
+        public CardAttribute(string path)
+        {
+            Path = path;
+        }
+    }
+
     public abstract class AbstractCard
     {
         public readonly string originalName;

@@ -1,5 +1,5 @@
-﻿using Common;
-using Core;
+﻿using Core;
+using Core.Card;
 using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
@@ -10,7 +10,7 @@ namespace Cards.SlayTheSpire.Model.Red
     internal class BattleTrance : SlayTheSpireCard, IMagicCard
     {
         private const string ID = "Battle Trance";
-        private static CardStrings cardStrings;
+        private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
         public int MagicNumber { get; private set; }
 
         public BattleTrance() : base(ID, cardStrings.NAME, "red/skill/battle_trance", 0, cardStrings.DESCRIPTION, CardType.Skill, CardColor.Red, CardRarity.Uncommon, CardTarget.Self)

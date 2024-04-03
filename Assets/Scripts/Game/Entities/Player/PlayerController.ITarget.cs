@@ -1,7 +1,7 @@
 ﻿using Core;
 using UnityEngine;
 
-namespace Game.Entities.Controller
+namespace Game.Entities.Player
 {
     public partial class PlayerController : ITarget
     {

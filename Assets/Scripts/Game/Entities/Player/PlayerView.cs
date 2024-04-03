@@ -5,7 +5,7 @@ using Core.Entities.View;
 using TMPro;
 using UnityEngine;
 
-namespace Game.Entities.View
+namespace Game.Entities.Player
 {
     [Object("Entity/Player")]
     public class PlayerView : EntityView, ISelectable

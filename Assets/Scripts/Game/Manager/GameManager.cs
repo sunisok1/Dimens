@@ -1,6 +1,6 @@
 using Core.Maps;
-using Game.Entities.Controller;
 using Game.Entities.EntityFactory;
+using Game.Entities.Player;
 using Systems.TurnSystem;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace Game.Manager
             AbstractMap map = abstractMapGenerator.GenerateMap();
             PlayerFactory playerFactory = new(map);
 
-            var players = new PlayerController[9];
+            var players = new PlayerController[4];
             for (var i = 0; i < players.Length; i++)
             {
                 if (!map.GetUnoccupiedPosition(out Vector3Int pos)) return;

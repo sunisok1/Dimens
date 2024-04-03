@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Reflection;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Common
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class ObjectAttribute : Attribute
     {
-        public string Path { get; }
+        internal string Path { get; }
 
         public ObjectAttribute(string path)
         {
@@ -20,16 +21,30 @@ namespace Common
         public virtual void OnCreated(params object[] objs)
         {
             Debug.Log($"{GetType().Name} 已创建。附带参数数量: {objs?.Length ?? 0}");
-            FindComponents();
         }
 
-        protected virtual void FindComponents()
+        public void DestroySelf()
         {
+            Destroy(gameObject);
         }
     }
 
     public static class ObjectManager
     {
+        public static T CreateDerived<T>(string path, Transform parent, params object[] objs) where T : BaseObject
+        {
+            var prefab = Resources.Load<T>(path);
+            if (prefab == null)
+            {
+                Debug.LogError($"ObjectManager: 无法加载 {typeof(T).Name} 的预制体。请确保路径正确且资源存在。");
+                return null;
+            }
+
+            T instance = UnityEngine.Object.Instantiate(prefab, parent);
+            instance.OnCreated(objs);
+            return instance;
+        }
+
         public static T Create<T>(Transform parent, params object[] objs) where T : BaseObject
         {
             Type type = typeof(T);

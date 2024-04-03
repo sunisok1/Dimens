@@ -1,38 +1,22 @@
-﻿using System;
-using Common;
-using Core;
+﻿using Common;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Cards.SlayTheSpire.View
+namespace Core.Card
 {
-    [Object("Card/CardWrapper")]
-    internal sealed class CardWrapper : BaseObject, IPointerClickHandler
+    [Object("Card/CardView")]
+    public class CardView : BaseObject, IPointerClickHandler
     {
-        private AbstractCard card;
         private bool selected;
 
         private RectTransform rectTransform;
         [SerializeField] private float moveAmount = 40f;
 
-        public override void OnCreated(params object[] objs)
+        private void Start()
         {
-            base.OnCreated(objs);
-            if (objs.Length > 0 && objs[0] is AbstractCard card)
-            {
-                this.card = card;
-                rectTransform = transform as RectTransform;
-                switch (card)
-                {
-                    case SlayTheSpireCard slayTheSpireCard:
-                        ObjectManager.Create<SlayTheSpireCardObject>(transform, slayTheSpireCard);
-
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(card));
-                }
-            }
+            rectTransform = transform as RectTransform;
         }
+
 
         private void MoveTransform(float moveAmount)
         {

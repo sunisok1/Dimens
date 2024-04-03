@@ -5,5 +5,6 @@ namespace Core
     public interface ITurnRunner
     {
         IEnumerator RunTurn();
+        void EndTurn();
     }
 }

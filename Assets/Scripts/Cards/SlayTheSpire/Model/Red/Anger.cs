@@ -1,5 +1,5 @@
-﻿using Common;
-using Core;
+﻿using Core;
+using Core.Card;
 using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;

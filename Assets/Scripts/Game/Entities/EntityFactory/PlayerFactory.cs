@@ -1,8 +1,7 @@
 ﻿using Common;
 using Core.Entities.Factory;
 using Core.Maps;
-using Game.Entities.Controller;
-using Game.Entities.View;
+using Game.Entities.Player;
 using UnityEngine;
 
 namespace Game.Entities.EntityFactory

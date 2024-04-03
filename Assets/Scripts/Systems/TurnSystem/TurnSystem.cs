@@ -5,23 +5,34 @@ namespace Systems.TurnSystem
 {
     internal class TurnSystem
     {
+        public int turnNum;
+
         private readonly LinkedList<ITurnRunner> runnersLinkedList = new();
         private LinkedListNode<ITurnRunner> currentRunnerNode;
 
         internal int RunnerCount => runnersLinkedList.Count;
 
+
+        internal void Init(out ITurnRunner firstTurnRunner)
+        {
+            currentRunnerNode = runnersLinkedList.First;
+            firstTurnRunner = currentRunnerNode.Value;
+        }
+
         internal void AddRunner(ITurnRunner runner)
         {
             runnersLinkedList.AddLast(runner);
-            currentRunnerNode ??= runnersLinkedList.First;
         }
 
         internal ITurnRunner CurrentTurnRunner => currentRunnerNode.Value;
 
-        internal ITurnRunner SwitchToNextRunner()
+        internal bool SwitchToNextRunner(out ITurnRunner turnRunner)
         {
+            turnRunner = null;
+            if (runnersLinkedList.Count <= 1) return false;
             currentRunnerNode = currentRunnerNode.Next ?? runnersLinkedList.First;
-            return currentRunnerNode.Value;
+            turnRunner = currentRunnerNode.Value;
+            return true;
         }
     }
 }

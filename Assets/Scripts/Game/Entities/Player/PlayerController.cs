@@ -1,7 +1,6 @@
 ﻿using Core.Entities;
-using Game.Entities.View;
 
-namespace Game.Entities.Controller
+namespace Game.Entities.Player
 {
     public partial class PlayerController : EntityController
     {

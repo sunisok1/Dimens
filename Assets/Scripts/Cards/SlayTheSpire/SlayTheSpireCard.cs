@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core;
+using Core.Card;
 
 namespace Cards
 {
@@ -51,8 +52,8 @@ namespace Cards
         StarterStrike
     }
 
-
-    public abstract class SlayTheSpireCard : AbstractCard, IUpgradeable
+    [Card("Card/SlayTheSpireCardView")]
+    internal abstract class SlayTheSpireCard : AbstractCard, IUpgradeable
     {
         private const string PortraitsDirectory = "Slay the Spire/cards/";
 

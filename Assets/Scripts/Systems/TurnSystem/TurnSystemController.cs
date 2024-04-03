@@ -22,20 +22,21 @@ namespace Systems.TurnSystem
                 turnSystem.AddRunner(runner);
             }
 
+            turnSystem.Init(out ITurnRunner turnRunner);
             StartCoroutine(RunTurnCycle());
-        }
+            return;
 
-        private IEnumerator RunTurnCycle()
-        {
-            while (true)
+            IEnumerator RunTurnCycle()
             {
-                yield return new WaitForSeconds(1);
-                ITurnRunner turnRunner = turnSystem.CurrentTurnRunner;
+                do
+                {
+                    turnSystem.turnNum++;
+                    Debug.Log($"{turnRunner} starts turn.turnNum:{turnSystem.turnNum}");
+                    turnSystemView.UpdateTurnNumText(turnSystem.turnNum);
+                    turnSystemView.UpdateRunnerInfo(turnRunner);
 
-                yield return turnRunner.RunTurn();
-
-                turnRunner = turnSystem.SwitchToNextRunner();
-                turnSystemView.UpdateRunnerInfo(turnRunner);
+                    yield return turnRunner.RunTurn();
+                } while (turnSystem.SwitchToNextRunner(out turnRunner));
             }
         }
     }
