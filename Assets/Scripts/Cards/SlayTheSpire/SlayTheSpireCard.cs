@@ -55,19 +55,17 @@ namespace Cards
     [Card("Card/SlayTheSpireCardView")]
     internal abstract class SlayTheSpireCard : AbstractCard, IUpgradeable
     {
-        private const string PortraitsDirectory = "Slay the Spire/cards/";
-
-        public readonly CardType type;
         protected int cost;
-        protected CardRarity rarity;
-        protected CardColor color;
-        protected CardTarget target;
+        public readonly CardType type;
+        public readonly CardRarity rarity;
+        public readonly CardColor color;
+        public readonly CardTarget target;
         protected readonly List<CardTags> tags = new();
         public int TimesUpgraded { get; set; }
         protected int costForTurn;
         protected bool Upgraded { get; private set; }
 
-        protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardColor color, CardRarity rarity, CardTarget target) : base(name, cardID, PortraitsDirectory + portrait, rawDescription)
+        protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardColor color, CardRarity rarity, CardTarget target) : base(cardID, name, portrait, rawDescription)
         {
             this.type = type;
             this.cost = cost;

@@ -8,7 +8,7 @@ namespace Cards.SlayTheSpire.Model.Red
 {
     internal class Bash : SlayTheSpireCard, IMagicCard, IDamageCard
     {
-        private const string ID = "Strike_R";
+        private const string ID = "Bash";
         private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
         public int Damage { get; private set; }
         public int MagicNumber { get; private set; }

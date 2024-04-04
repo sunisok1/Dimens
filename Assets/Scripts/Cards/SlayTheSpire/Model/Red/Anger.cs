@@ -12,7 +12,7 @@ namespace Cards.SlayTheSpire.Model.Red
         private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
         public int Damage { get; private set; }
 
-        public Anger() : base(ID, cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Basic, CardTarget.Enemy)
+        public Anger() : base(ID, cardStrings.NAME, "red/attack/anger", 0, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Uncommon, CardTarget.Enemy)
         {
             Damage = 6;
         }

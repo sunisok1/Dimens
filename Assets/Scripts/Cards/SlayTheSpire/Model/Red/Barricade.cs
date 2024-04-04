@@ -13,7 +13,7 @@ namespace Cards.SlayTheSpire.Model.Red
         private const string ID = "Barricade";
         private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
 
-        public Barricade() : base(ID, cardStrings.NAME, "red/power/barricade", 3, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Basic, CardTarget.Self)
+        public Barricade() : base(ID, cardStrings.NAME, "red/power/barricade", 3, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Rare, CardTarget.Self)
         {
         }
 

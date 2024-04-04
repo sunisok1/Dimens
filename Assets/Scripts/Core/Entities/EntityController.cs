@@ -7,6 +7,7 @@ namespace Core.Entities
     {
         private readonly AbstractEntityModel entityModel;
         private readonly EntityView view;
+        
 
         protected EntityController(AbstractEntityModel entityModel, EntityView view)
         {

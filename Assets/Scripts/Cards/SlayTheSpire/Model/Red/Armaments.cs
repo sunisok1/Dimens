@@ -12,7 +12,7 @@ namespace Cards.SlayTheSpire.Model.Red
         private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
         public int Block { get; }
 
-        public Armaments() : base(ID, cardStrings.NAME, "red/skill/armaments", 1, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Basic, CardTarget.Self)
+        public Armaments() : base(ID, cardStrings.NAME, "red/skill/armaments", 1, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Common, CardTarget.Self)
         {
             Block = 5;
         }

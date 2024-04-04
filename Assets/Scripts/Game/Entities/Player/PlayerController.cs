@@ -11,6 +11,7 @@ namespace Game.Entities.Player
         {
             this.model = model;
             this.view = view;
+            coroutineHelper = view;
         }
 
         public void SetInfo(int health, int maxHealth)
