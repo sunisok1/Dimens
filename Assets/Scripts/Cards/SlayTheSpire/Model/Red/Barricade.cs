@@ -20,8 +20,8 @@ namespace Cards.SlayTheSpire.Model.Red
         public override void Upgrade()
         {
             UpgradeName();
-            costForTurn = Math.Max(0, costForTurn + 2 - cost);
-            cost = 2;
+            costForTurn = Math.Max(0, costForTurn + 2 - Cost);
+            Cost = 2;
         }
 
         protected override AbstractCard MakeCopy()

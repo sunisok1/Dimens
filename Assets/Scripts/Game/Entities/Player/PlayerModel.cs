@@ -9,6 +9,8 @@ namespace Game.Entities.Player
         {
         }
 
+        public int Energy { get; set; }
+
         public int CurHealth { get; set; }
 
         public int MaxHealth { get; set; }

@@ -1,25 +1,28 @@
 ﻿using Common;
-using Core.Entities.Factory;
+using Core.Card.Deck;
 using Core.Maps;
 using Game.Entities.Player;
 using UnityEngine;
 
 namespace Game.Entities.EntityFactory
 {
-    public class PlayerFactory : IEntityFactory<PlayerController>
+    public class PlayerFactory : MonoBehaviour
     {
-        private readonly AbstractMap map;
+        [SerializeField] private AbstractDeckFactory deckFactory;
 
-        public PlayerFactory(AbstractMap map)
-        {
-            this.map = map;
-        }
+        private AbstractMap map;
+
+        public void SetMap(AbstractMap map) => this.map = map;
+
 
         public PlayerController CreateEntity(string name, Vector3Int position)
         {
             var playerModel = new PlayerModel(name, position);
             var playerView = ObjectManager.Create<PlayerView>(map.GetContent(), playerModel);
-            return new PlayerController(playerModel, playerView);
+            var playerController = new PlayerController(playerModel, playerView);
+
+            playerController.InitDeck(deckFactory.CreateInstance());
+            return playerController;
         }
     }
 }

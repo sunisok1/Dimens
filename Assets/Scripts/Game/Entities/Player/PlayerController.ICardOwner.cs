@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using Cards.SlayTheSpire;
 using Core;
 using Core.Card;
+using Core.Card.Deck;
 
 namespace Game.Entities.Player
 {
     public partial class PlayerController : ICardOwner
     {
-        private readonly Deck deck = new();
+        private AbstractDeck deck;
         private readonly HashSet<CardController> cards = new();
         public event Action<CardController> OnAddCard;
         public event Action<CardController> OnDiscard;
+
+        internal void InitDeck(AbstractDeck deck)
+        {
+            this.deck = deck;
+        }
 
         public void AddCard(IEnumerable<CardController> addedCards)
         {

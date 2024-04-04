@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Common;
 using Core;
+using Core.Card;
 using UnityEngine;
 
 namespace Game.Entities.Player
@@ -29,7 +30,12 @@ namespace Game.Entities.Player
 
         private IEnumerator UseCard()
         {
-            InitSelector(cards, card => true);
+            InitSelector(cards, card =>
+            {
+                if (card is IEnergyRequired energyRequired && energyRequired.Cost > model.Energy)
+                    return false;
+                return true;
+            });
             yield return new WaitWhile(() => true);
         }
     }

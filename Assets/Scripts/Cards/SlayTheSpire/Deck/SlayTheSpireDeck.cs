@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using Cards.SlayTheSpire.Model.Red;
-using Core.Card;
+﻿using Cards.SlayTheSpire.Model.Red;
+using Core.Card.Deck;
 
-namespace Cards.SlayTheSpire
+namespace Cards.SlayTheSpire.Deck
 {
-    public class Deck
+    internal class SlayTheSpireDeck : AbstractDeck
     {
-        private List<AbstractCard> cardList = new();
-
-        public Deck()
+        public SlayTheSpireDeck()
         {
             cardList.Add(new Anger());
             cardList.Add(new Armaments());
@@ -30,13 +27,6 @@ namespace Cards.SlayTheSpire
             cardList.Add(new Barricade());
             cardList.Add(new Bash());
             cardList.Add(new BattleTrance());
-        }
-
-        public AbstractCard Draw()
-        {
-            var card = cardList[^1];
-            cardList.RemoveAt(cardList.Count - 1);
-            return card;
         }
     }
 }

@@ -10,11 +10,12 @@ namespace Game.Manager
     {
         [SerializeField] private AbstractMapGenerator abstractMapGenerator;
         [SerializeField] private TurnSystemController turnSystemController;
+        [SerializeField] private PlayerFactory playerFactory;
 
         private void Start()
         {
             AbstractMap map = abstractMapGenerator.GenerateMap();
-            PlayerFactory playerFactory = new(map);
+            playerFactory.SetMap(map);
 
             var players = new PlayerController[4];
             for (var i = 0; i < players.Length; i++)

@@ -53,9 +53,9 @@ namespace Cards
     }
 
     [Card("Card/SlayTheSpireCardView")]
-    internal abstract class SlayTheSpireCard : AbstractCard, IUpgradeable
+    internal abstract class SlayTheSpireCard : AbstractCard, IEnergyRequired, IUpgradeable
     {
-        protected int cost;
+        public int Cost { get; protected set; }
         public readonly CardType type;
         public readonly CardRarity rarity;
         public readonly CardColor color;
@@ -68,7 +68,7 @@ namespace Cards
         protected SlayTheSpireCard(string cardID, string name, string portrait, int cost, string rawDescription, CardType type, CardColor color, CardRarity rarity, CardTarget target) : base(cardID, name, portrait, rawDescription)
         {
             this.type = type;
-            this.cost = cost;
+            this.Cost = cost;
             this.color = color;
             this.rarity = rarity;
             this.target = target;
