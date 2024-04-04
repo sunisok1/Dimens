@@ -10,9 +10,16 @@ namespace Systems.TurnSystem
         [SerializeField] private TextMeshProUGUI turnNumText;
         [SerializeField] private CardPanel cardPanel;
         [SerializeField] private Button endTurnButton;
+        [SerializeField] private Button confirmButton;
+        [SerializeField] private Button cancelButton;
 
-        // private ITurnRunner currentRunner;
-
+        private ITurnRunner currentTurnRunner; 
+        private void Start()
+        {
+            endTurnButton.onClick.AddListener(() => currentTurnRunner?.EndTurn());
+            confirmButton.onClick.AddListener(() => currentTurnRunner?.Confirm());
+            cancelButton.onClick.AddListener(() => currentTurnRunner?.Cancel());
+        }
 
         public void UpdateTurnNumText(int turnNum)
         {
@@ -21,11 +28,10 @@ namespace Systems.TurnSystem
 
         public void UpdateRunnerInfo(ITurnRunner turnRunner)
         {
+            currentTurnRunner = turnRunner;
+
             if (turnRunner is ICardOwner cardOwner)
                 cardPanel.CurrentCardOwner = cardOwner;
-            
-            endTurnButton.onClick.RemoveAllListeners();
-            endTurnButton.onClick.AddListener(turnRunner.EndTurn);
         }
     }
 }

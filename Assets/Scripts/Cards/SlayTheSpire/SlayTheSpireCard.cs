@@ -2,64 +2,17 @@
 using Core;
 using Core.Card;
 
-namespace Cards
+namespace Cards.SlayTheSpire
 {
-    public enum CardTarget
-    {
-        Enemy,
-        AllEnemy,
-        Self,
-        None,
-        SelfAndEnemy,
-        All
-    }
-
-    public enum CardColor
-    {
-        Red,
-        Green,
-        Blue,
-        Purple,
-        Colorless,
-        Curse
-    }
-
-    public enum CardRarity
-    {
-        Basic,
-        Special,
-        Common,
-        Uncommon,
-        Rare,
-        Curse
-    }
-
-    public enum CardType
-    {
-        Attack,
-        Skill,
-        Power,
-        Status,
-        Curse
-    }
-
-    public enum CardTags
-    {
-        Healing,
-        Strike,
-        Empty,
-        StarterDefend,
-        StarterStrike
-    }
-
     [Card("Card/SlayTheSpireCardView")]
-    internal abstract class SlayTheSpireCard : AbstractCard, IEnergyRequired, IUpgradeable
+    internal abstract class SlayTheSpireCard : AbstractCard, IEnergyRequired, IUpgradeable, IHasTarget
     {
         public int Cost { get; protected set; }
         public readonly CardType type;
         public readonly CardRarity rarity;
         public readonly CardColor color;
-        public readonly CardTarget target;
+        public CardTarget Target { get; protected set; }
+
         protected readonly List<CardTags> tags = new();
         public int TimesUpgraded { get; set; }
         protected int costForTurn;
@@ -71,7 +24,7 @@ namespace Cards
             this.Cost = cost;
             this.color = color;
             this.rarity = rarity;
-            this.target = target;
+            this.Target = target;
         }
 
 

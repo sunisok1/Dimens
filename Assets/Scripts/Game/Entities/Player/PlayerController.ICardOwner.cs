@@ -36,6 +36,14 @@ namespace Game.Entities.Player
             }
         }
 
+        private void UseCard(CardController card, ITarget target)
+        {
+            cards.Remove(card);
+            Unselect(card);
+            card.Use(this, target);
+            OnUseCard?.Invoke(card);
+        }
+
         public IEnumerable<CardController> GetCards()
         {
             return cards;

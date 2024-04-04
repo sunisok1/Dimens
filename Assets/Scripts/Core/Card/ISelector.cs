@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace Core.Card
 {
@@ -9,5 +9,6 @@ namespace Core.Card
 
         void Select(CardController card);
         void Unselect(CardController card);
+        IEnumerator SelectTarget(Action<ITarget> returnValue);
     }
 }

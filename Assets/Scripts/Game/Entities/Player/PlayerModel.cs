@@ -1,4 +1,6 @@
-﻿using Core.Entities;
+﻿using System.Collections.Generic;
+using Core;
+using Core.Entities;
 using UnityEngine;
 
 namespace Game.Entities.Player
@@ -8,6 +10,8 @@ namespace Game.Entities.Player
         internal PlayerModel(string name, Vector3Int position) : base(name, position)
         {
         }
+
+        public List<AbstractPower> Powers { get; } = new();
 
         public int Energy { get; set; }
 

@@ -3,7 +3,6 @@ using Common;
 using Core.Card;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Cards.SlayTheSpire
@@ -16,6 +15,7 @@ namespace Cards.SlayTheSpire
 
         [SerializeField] private TextMeshProUGUI cardNameText;
         [SerializeField] private TextMeshProUGUI cardTypeText;
+        [SerializeField] private TextMeshProUGUI cardCostText;
         [SerializeField] private Image bg;
         [SerializeField] private Image portraits;
         [SerializeField] private Image frame;
@@ -74,6 +74,7 @@ namespace Cards.SlayTheSpire
                 portraits.sprite = Resources.Load<Sprite>($"{portraitsResPath}{card.portrait}");
                 cardNameText.text = card.Name;
                 cardTypeText.text = card.type.ToString();
+                cardCostText.text = card.Cost.ToString();
             }
         }
     }

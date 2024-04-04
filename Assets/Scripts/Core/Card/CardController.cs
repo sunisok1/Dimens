@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Reflection;
+using Cards.SlayTheSpire;
 using Common;
 using UnityEngine;
 
@@ -56,6 +58,36 @@ namespace Core.Card
         public void DestroyView()
         {
             cardView.DestroySelf();
+        }
+
+        public void Use(IUserController user, ITarget target)
+        {
+            card.Use(user, target);
+        }
+
+        public IEnumerator GetTarget(Action<ITarget> returnValue)
+        {
+            if (card is not IHasTarget hasTarget)
+                yield break;
+            switch (hasTarget.Target)
+            {
+                case CardTarget.Enemy:
+                    yield return Selector.SelectTarget(returnValue);
+                    break;
+                case CardTarget.AllEnemy:
+                    break;
+                case CardTarget.Self:
+                    returnValue(Selector as ITarget);
+                    break;
+                case CardTarget.None:
+                    break;
+                case CardTarget.SelfAndEnemy:
+                    break;
+                case CardTarget.All:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

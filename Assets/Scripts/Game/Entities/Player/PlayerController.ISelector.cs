@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Core;
 using Core.Card;
+using UnityEngine;
 
 namespace Game.Entities.Player
 {
@@ -28,6 +31,16 @@ namespace Game.Entities.Player
             {
                 cardController.Selector = this;
             }
+        }
+
+        private IEnumerator SelectCard()
+        {
+            yield return new WaitWhile(() => selectedCard == null);
+        }
+
+        public IEnumerator SelectTarget(Action<ITarget> callback)
+        {
+            yield break;
         }
     }
 }

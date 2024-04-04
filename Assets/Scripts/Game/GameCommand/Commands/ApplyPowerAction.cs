@@ -5,19 +5,19 @@ namespace Game.GameCommand.Commands
     public class ApplyPowerAction : ICommand
     {
         private readonly IUserController user;
-        private readonly ITarget powerCapable;
+        private readonly ITarget target;
         private readonly AbstractPower power;
 
-        public ApplyPowerAction(IUserController user, ITarget powerCapable, AbstractPower power)
+        public ApplyPowerAction(IUserController user, ITarget target, AbstractPower power)
         {
             this.user = user;
-            this.powerCapable = powerCapable;
+            this.target = target;
             this.power = power;
         }
 
         public void Execute()
         {
-            powerCapable.AddPower(power);
+            target.AddPower(power);
         }
     }
 }

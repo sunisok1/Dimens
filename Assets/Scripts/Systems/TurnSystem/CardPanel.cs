@@ -30,12 +30,14 @@ namespace Systems.TurnSystem
                     if (cardOwner == null) return;
                     cardOwner.OnAddCard -= DisplayCard;
                     cardOwner.OnDiscard -= RemoveCard;
+                    cardOwner.OnUseCard -= RemoveCard;
                 }
 
                 void SubscriptEvents(ICardOwner cardOwner)
                 {
                     cardOwner.OnAddCard += DisplayCard;
                     cardOwner.OnDiscard += RemoveCard;
+                    cardOwner.OnUseCard += RemoveCard;
                 }
 
                 void ClearCardViews()
@@ -78,6 +80,7 @@ namespace Systems.TurnSystem
             {
                 currentCardOwner.OnAddCard -= DisplayCard;
                 currentCardOwner.OnDiscard -= RemoveCard;
+                currentCardOwner.OnUseCard -= RemoveCard;
             }
         }
     }

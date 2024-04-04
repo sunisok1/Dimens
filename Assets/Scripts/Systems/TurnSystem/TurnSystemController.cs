@@ -7,13 +7,8 @@ namespace Systems.TurnSystem
 {
     public class TurnSystemController : MonoBehaviour
     {
-        private TurnSystem turnSystem;
+        private readonly TurnSystem turnSystem = new();
         [SerializeField] private TurnSystemView turnSystemView;
-
-        private void Awake()
-        {
-            turnSystem = new TurnSystem();
-        }
 
         public void Init(IEnumerable<ITurnRunner> runners)
         {

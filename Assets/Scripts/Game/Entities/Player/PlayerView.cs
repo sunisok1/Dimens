@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Game.Entities.Player
 {
     [Object("Entity/Player")]
-    public class PlayerView : EntityView, ISelectable
+    public partial class PlayerView : EntityView, ISelectable
     {
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI healthText;

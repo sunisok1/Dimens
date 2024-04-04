@@ -7,7 +7,7 @@ namespace Game.Entities.Player
     {
         public void AddPower(AbstractPower power)
         {
-            throw new System.NotImplementedException();
+            model.Powers.Add(power);
         }
 
         public void TakeDamage(DamageInfo damage)

@@ -621,6 +621,8 @@ MonoBehaviour:
   turnNumText: {fileID: 6183128166087506821}
   cardPanel: {fileID: 2518436101723925185}
   endTurnButton: {fileID: 760320216486650724}
+  confirmButton: {fileID: 9112922414496029825}
+  cancelButton: {fileID: 2568000899701761429}
 --- !u!1 &4440468891265167303
 GameObject:
   m_ObjectHideFlags: 0
