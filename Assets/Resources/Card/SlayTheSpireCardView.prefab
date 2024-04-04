@@ -1015,6 +1015,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3682003628811325279, guid: 59b282f207a82e941abe86db3ac2a0bd, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5358158631662641488, guid: 59b282f207a82e941abe86db3ac2a0bd, type: 3}
       propertyPath: m_Name
       value: SlayTheSpireCardView

@@ -29,7 +29,8 @@ namespace Game.Entities.Player
 
         private IEnumerator UseCard()
         {
-            yield break;
+            InitSelector(cards, card => true);
+            yield return new WaitWhile(() => true);
         }
     }
 }
