@@ -20,7 +20,7 @@ namespace Cards.SlayTheSpire.Model.Red
 
         public override void Use(IUserController user, ITarget target)
         {
-            CommandInvoker.ExecuteCommand(new DrawCardAction(user, MagicNumber));
+            CommandInvoker.ExecuteCommand(new DrawCardAction(target, MagicNumber));
             CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, target, new NoDrawPower(user)));
         }
 

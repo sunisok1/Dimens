@@ -8,5 +8,6 @@
 
         void AddPower(AbstractPower power);
         bool HasPower(string powerId);
+        void Draw(int amount);
     }
 }

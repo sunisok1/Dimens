@@ -12,5 +12,6 @@ namespace Core
         void AddCard(IEnumerable<CardController> addedCards);
         void Discard(IEnumerable<CardController> discards);
         IEnumerable<CardController> GetCards();
+        void UseCard(CardController card, ITarget target);
     }
 }

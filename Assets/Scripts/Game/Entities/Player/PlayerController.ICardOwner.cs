@@ -2,27 +2,19 @@
 using System.Collections.Generic;
 using Core;
 using Core.Card;
-using Core.Card.Deck;
 
 namespace Game.Entities.Player
 {
     public partial class PlayerController : ICardOwner
     {
-        private AbstractDeck deck;
-        private readonly HashSet<CardController> cards = new();
         public event Action<CardController> OnAddCard;
         public event Action<CardController> OnDiscard;
-
-        internal void InitDeck(AbstractDeck deck)
-        {
-            this.deck = deck;
-        }
 
         public void AddCard(IEnumerable<CardController> addedCards)
         {
             foreach (var card in addedCards)
             {
-                cards.Add(card);
+                model.cards.Add(card);
                 OnAddCard?.Invoke(card);
             }
         }
@@ -31,14 +23,14 @@ namespace Game.Entities.Player
         {
             foreach (var card in discards)
             {
-                cards.Remove(card);
+                model.cards.Remove(card);
                 OnDiscard?.Invoke(card);
             }
         }
 
-        private void UseCard(CardController card, ITarget target)
+        public void UseCard(CardController card, ITarget target)
         {
-            cards.Remove(card);
+            model.cards.Remove(card);
             Unselect(card);
             card.Use(this, target);
             OnUseCard?.Invoke(card);
@@ -46,18 +38,7 @@ namespace Game.Entities.Player
 
         public IEnumerable<CardController> GetCards()
         {
-            return cards;
-        }
-
-        private void Draw(int num)
-        {
-            var cardControllers = new List<CardController>();
-            for (int i = 0; i < num; i++)
-            {
-                cardControllers.Add(new(deck.Draw()));
-            }
-
-            AddCard(cardControllers);
+            return model.cards;
         }
     }
 }

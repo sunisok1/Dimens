@@ -2,20 +2,10 @@
 
 namespace Game.GameCommand.Commands
 {
-    public class DamageCommand : ICommand
+    public class DamageCommand : Command
     {
-        private readonly ITarget target;
-        private readonly DamageInfo damageInfo;
-
-        public DamageCommand(ITarget target, DamageInfo damageInfo)
+        public DamageCommand(ITarget target, DamageInfo damageInfo) : base(() => target.TakeDamage(damageInfo))
         {
-            this.target = target;
-            this.damageInfo = damageInfo;
-        }
-
-        public void Execute()
-        {
-            target.TakeDamage(damageInfo);
         }
     }
 }

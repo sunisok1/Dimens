@@ -4,16 +4,10 @@ using Core.Card;
 
 namespace Game.GameCommand.Commands
 {
-    public class MakeTempCardInDiscardAction : ICommand
+    public class MakeTempCardInDiscardAction : Command
     {
-        public MakeTempCardInDiscardAction(AbstractCard card, int i)
+        public MakeTempCardInDiscardAction(AbstractCard card, int i) : base(() => { throw new NotImplementedException(); })
         {
-            throw new NotImplementedException();
-        }
-
-        public void Execute()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -2,13 +2,9 @@
 
 namespace Game.GameCommand.Commands
 {
-    public class DrawCardAction : ICommand
+    public class DrawCardAction : Command
     {
-        public DrawCardAction(IUserController source, int amount)
-        {
-        }
-
-        public void Execute()
+        public DrawCardAction(ITarget target, int amount) : base(() => target.Draw(amount))
         {
         }
     }

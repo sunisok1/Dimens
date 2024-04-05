@@ -1,4 +1,6 @@
-﻿using Core;
+﻿using System.Collections.Generic;
+using Core;
+using Core.Card;
 using UnityEngine;
 
 namespace Game.Entities.Player
@@ -32,6 +34,17 @@ namespace Game.Entities.Player
         public bool HasPower(string powerId)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Draw(int amount)
+        {
+            var cardControllers = new List<CardController>();
+            for (var i = 0; i < amount; i++)
+            {
+                cardControllers.Add(new(model.Deck.Draw()));
+            }
+
+            AddCard(cardControllers);
         }
     }
 }

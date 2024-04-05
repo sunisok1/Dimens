@@ -1,7 +1,16 @@
-﻿namespace Core
+﻿using System;
+
+namespace Core
 {
-    public interface ICommand
+    public abstract class Command
     {
-        void Execute();
+        private readonly Action action;
+
+        protected Command(Action action)
+        {
+            this.action = action;
+        }
+
+        public void Execute() => action();
     }
 }

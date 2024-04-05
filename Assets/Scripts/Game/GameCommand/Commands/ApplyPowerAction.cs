@@ -2,22 +2,10 @@ using Core;
 
 namespace Game.GameCommand.Commands
 {
-    public class ApplyPowerAction : ICommand
+    public class ApplyPowerAction : Command
     {
-        private readonly IUserController user;
-        private readonly ITarget target;
-        private readonly AbstractPower power;
-
-        public ApplyPowerAction(IUserController user, ITarget target, AbstractPower power)
+        public ApplyPowerAction(IUserController user, ITarget target, AbstractPower power) : base(() => { target.AddPower(power); })
         {
-            this.user = user;
-            this.target = target;
-            this.power = power;
-        }
-
-        public void Execute()
-        {
-            target.AddPower(power);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Core;
+using Game.GameCommand;
+using Game.GameCommand.Commands;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +15,8 @@ namespace Systems.TurnSystem
         [SerializeField] private Button confirmButton;
         [SerializeField] private Button cancelButton;
 
-        private ITurnRunner currentTurnRunner; 
+        private ITurnRunner currentTurnRunner;
+
         private void Start()
         {
             endTurnButton.onClick.AddListener(() => currentTurnRunner?.EndTurn());

@@ -3,20 +3,10 @@ using UnityEngine;
 
 namespace Game.GameCommand.Commands
 {
-    public class MoveCommand : ICommand
+    public class MoveCommand : Command
     {
-        private readonly IMovable movableObject;
-        private readonly Vector3Int target;
-
-        public MoveCommand(IMovable movableObject, Vector3Int target)
+        public MoveCommand(IMovable movableObject, Vector3Int target) : base(() => { movableObject.MoveTo(target); })
         {
-            this.movableObject = movableObject;
-            this.target = target;
-        }
-
-        public void Execute()
-        {
-            movableObject.MoveTo(target);
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections;
 using Common;
 using Core;
 using Core.Card;
+using Game.GameCommand;
+using Game.GameCommand.Commands;
 using UnityEngine;
 
 namespace Game.Entities.Player
@@ -25,7 +27,7 @@ namespace Game.Entities.Player
 
         public IEnumerator RunTurn()
         {
-            Draw(3);
+            CommandInvoker.ExecuteCommand(new DrawCardAction(this, 3));
 
             Coroutine useCard = coroutineHelper.StartCoroutine(UseCardCycle());
 
@@ -38,7 +40,7 @@ namespace Game.Entities.Player
         {
             while (true)
             {
-                InitSelector(cards, card =>
+                InitSelector(model.cards, card =>
                 {
                     if (card is IEnergyRequired energyRequired && energyRequired.Cost > model.Energy)
                         return false;
@@ -52,9 +54,16 @@ namespace Game.Entities.Player
                 ITarget selectedTarget = null;
                 yield return selectedCard.GetTarget(target => selectedTarget = target);
 
-                confirmTrigger.onTrigger = () => UseCard(selectedCard, selectedTarget);
+                confirmTrigger.onTrigger = () => { CommandInvoker.ExecuteCommand(new UseCardAction(this, selectedCard, selectedTarget)); };
                 yield return confirmTrigger.WaitForTrigger();
             }
+        }
+    }
+
+    internal class UseCardAction : Command
+    {
+        public UseCardAction(ICardOwner cardOwner, CardController selectedCard, ITarget selectedTarget) : base(() => cardOwner.UseCard(selectedCard, selectedTarget))
+        {
         }
     }
 }

@@ -3,16 +3,10 @@ using Core;
 
 namespace Game.GameCommand.Commands
 {
-    public class ArmamentsAction : ICommand
+    public class ArmamentsAction : Command
     {
-        public ArmamentsAction(bool upgraded)
+        public ArmamentsAction(bool upgraded) : base(() => throw new NotImplementedException())
         {
-            throw new NotImplementedException();
-        }
-
-        public void Execute()
-        {
-            throw new NotImplementedException();
         }
     }
 }
