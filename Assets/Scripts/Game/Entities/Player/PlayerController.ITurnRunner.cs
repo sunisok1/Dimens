@@ -3,13 +3,14 @@ using System.Collections;
 using Common;
 using Core;
 using Core.Card;
+using Core.Entities;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
 using UnityEngine;
 
 namespace Game.Entities.Player
 {
-    public partial class PlayerController : ITurnRunner, IUserController
+    public partial class Player : ITurnRunner
     {
         private readonly CoroutineTrigger endTurnTrigger = new();
         private readonly CoroutineTrigger confirmTrigger = new();
@@ -40,9 +41,9 @@ namespace Game.Entities.Player
         {
             while (true)
             {
-                InitSelector(model.cards, card =>
+                InitSelector(cards, card =>
                 {
-                    if (card is IEnergyRequired energyRequired && energyRequired.Cost > model.Energy)
+                    if (card is IEnergyRequired energyRequired && energyRequired.Cost > Energy)
                         return false;
                     return true;
                 });
@@ -51,7 +52,7 @@ namespace Game.Entities.Player
 
                 yield return SelectCard();
 
-                ITarget selectedTarget = null;
+                AbstractEntity selectedTarget = null;
                 yield return selectedCard.GetTarget(target => selectedTarget = target);
 
                 confirmTrigger.onTrigger = () => { CommandInvoker.ExecuteCommand(new UseCardAction(this, selectedCard, selectedTarget)); };
@@ -62,7 +63,7 @@ namespace Game.Entities.Player
 
     internal class UseCardAction : Command
     {
-        public UseCardAction(ICardOwner cardOwner, CardController selectedCard, ITarget selectedTarget) : base(() => cardOwner.UseCard(selectedCard, selectedTarget))
+        public UseCardAction(ICardOwner cardOwner, CardController selectedCard, AbstractEntity target) : base(() => cardOwner.UseCard(selectedCard, target))
         {
         }
     }

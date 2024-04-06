@@ -4,7 +4,7 @@ namespace Game.GameCommand.Commands
 {
     public class DamageCommand : Command
     {
-        public DamageCommand(ITarget target, DamageInfo damageInfo) : base(() => target.TakeDamage(damageInfo))
+        public DamageCommand(IHealth target, DamageInfo damageInfo) : base(() => target.TakeDamage(damageInfo))
         {
         }
     }

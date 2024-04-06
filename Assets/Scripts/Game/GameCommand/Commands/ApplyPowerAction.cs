@@ -1,10 +1,11 @@
 using Core;
+using Core.Entities;
 
 namespace Game.GameCommand.Commands
 {
     public class ApplyPowerAction : Command
     {
-        public ApplyPowerAction(IUserController user, ITarget target, AbstractPower power) : base(() => { target.AddPower(power); })
+        public ApplyPowerAction(AbstractEntity user, IPowerOwner powerOwner, AbstractPower power) : base(() => { powerOwner.AddPower(power); })
         {
         }
     }

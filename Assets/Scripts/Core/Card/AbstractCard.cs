@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Entities;
 
 namespace Core.Card
 {
@@ -31,7 +32,7 @@ namespace Core.Card
             this.rawDescription = rawDescription;
         }
 
-        public abstract void Use(IUserController user, ITarget target);
+        public abstract void Use(AbstractEntity user, AbstractEntity target);
         protected abstract AbstractCard MakeCopy();
 
         protected static AbstractCard MakeStatEquivalentCopy(AbstractCard card)

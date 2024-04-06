@@ -19,7 +19,7 @@
 
         public bool canGoNegative = false;
 
-        public ITarget owner;
+        public IPowerOwner owner;
 
         public PowerType powerType;
 

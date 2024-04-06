@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Core;
 using Core.Card;
+using Core.Entities;
 using UnityEngine;
 
 namespace Game.Entities.Player
 {
-    public partial class PlayerController : ISelector
+    public partial class Player : ISelector
     {
         private CardController selectedCard;
 
@@ -38,7 +38,7 @@ namespace Game.Entities.Player
             yield return new WaitWhile(() => selectedCard == null);
         }
 
-        public IEnumerator SelectTarget(Action<ITarget> callback)
+        public IEnumerator SelectTarget(Action<AbstractEntity> callback)
         {
             yield break;
         }

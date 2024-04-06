@@ -1,4 +1,4 @@
-﻿using Cards.SlayTheSpire;
+﻿using Core.Card;
 
 namespace Core
 {

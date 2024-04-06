@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Reflection;
-using Cards.SlayTheSpire;
 using Common;
+using Core.Entities;
 using UnityEngine;
 
 namespace Core.Card
@@ -60,12 +60,12 @@ namespace Core.Card
             cardView.DestroySelf();
         }
 
-        public void Use(IUserController user, ITarget target)
+        public void Use(AbstractEntity user, AbstractEntity target)
         {
             card.Use(user, target);
         }
 
-        public IEnumerator GetTarget(Action<ITarget> returnValue)
+        public IEnumerator GetTarget(Action<AbstractEntity> returnValue)
         {
             if (card is not IHasTarget hasTarget)
                 yield break;
@@ -77,7 +77,7 @@ namespace Core.Card
                 case CardTarget.AllEnemy:
                     break;
                 case CardTarget.Self:
-                    returnValue(Selector as ITarget);
+                    returnValue(Selector as AbstractEntity);
                     break;
                 case CardTarget.None:
                     break;

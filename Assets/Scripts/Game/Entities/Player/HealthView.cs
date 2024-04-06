@@ -1,5 +1,4 @@
-﻿using Core.Entities;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +9,11 @@ namespace Game.Entities.Player
         [SerializeField] private TextMeshProUGUI healthText;
         [SerializeField] private Image fill;
 
-        public void UpdateHealth(IHealth health)
+
+        public void UpdateHealth(int currentHealth, int maxHealth)
         {
-            healthText.text = $"{health.CurHealth}/{health.MaxHealth}";
-            fill.fillAmount = (float)health.CurHealth / health.MaxHealth;
+            healthText.text = $"{currentHealth}/{maxHealth}";
+            fill.fillAmount = (float)currentHealth / maxHealth;
         }
     }
 }

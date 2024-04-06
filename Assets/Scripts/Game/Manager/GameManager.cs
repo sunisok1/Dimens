@@ -17,13 +17,13 @@ namespace Game.Manager
             AbstractMap map = abstractMapGenerator.GenerateMap();
             playerFactory.SetMap(map);
 
-            var players = new PlayerController[4];
+            var players = new Player[4];
             for (var i = 0; i < players.Length; i++)
             {
                 if (!map.GetUnoccupiedPosition(out Vector3Int pos)) return;
 
                 players[i] = playerFactory.CreateEntity($"player_{i}", pos);
-                players[i].SetInfo(100, 100);
+                players[i].SetHealth(100, 100);
             }
 
             turnSystemController.Init(players);

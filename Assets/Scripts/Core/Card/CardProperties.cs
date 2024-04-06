@@ -1,4 +1,4 @@
-﻿namespace Cards.SlayTheSpire
+﻿namespace Core.Card
 {
     public enum CardTarget
     {

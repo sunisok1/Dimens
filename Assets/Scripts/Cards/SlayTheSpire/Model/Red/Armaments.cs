@@ -1,5 +1,6 @@
 ﻿using Core;
 using Core.Card;
+using Core.Entities;
 using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
@@ -29,7 +30,7 @@ namespace Cards.SlayTheSpire.Model.Red
             return new Armaments();
         }
 
-        public override void Use(IUserController user, ITarget target)
+        public override void Use(AbstractEntity user, AbstractEntity target)
         {
             CommandInvoker.ExecuteCommand(new GainBlockAction(user, user, Block));
             CommandInvoker.ExecuteCommand(new ArmamentsAction(Upgraded));

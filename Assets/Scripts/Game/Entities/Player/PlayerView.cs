@@ -1,37 +1,44 @@
 ﻿using System;
 using Common;
-using Core.Entities;
-using Core.Entities.View;
 using TMPro;
 using UnityEngine;
 
 namespace Game.Entities.Player
 {
     [Object("Entity/PlayerView")]
-    public class PlayerView : EntityView, ISelectable
+    public class PlayerView : BaseObject, ISelectable
     {
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private HealthView healthView;
 
+        private Player player;
 
         public override void OnCreated(params object[] objs)
         {
             base.OnCreated(objs);
             if (objs.Length <= 0) return;
-            if (objs[0] is not PlayerModel model) return;
-            UpdatePosition(model.Position);
-            UpdateName(model.Name);
+
+            player = objs[0] as Player;
+            if (player == null) return;
+
+            UpdateName();
+            UpdatePosition();
+            player.OnHealthChange += UpdateHealth;
         }
 
-
-        public override void UpdatePosition(Vector3Int position)
+        private void OnDestroy()
         {
-            transform.position = position;
+            player.OnHealthChange -= UpdateHealth;
         }
 
-        private void UpdateName(string name)
+        public void UpdatePosition()
         {
-            nameText.text = name;
+            transform.position = player.Position;
+        }
+
+        private void UpdateName()
+        {
+            nameText.text = player.Name;
         }
 
         public bool Select()
@@ -53,6 +60,6 @@ namespace Game.Entities.Player
         public event Action OnSelected;
         public event Action OnDeselected;
 
-        internal void UpdateHealth(IHealth health) => healthView.UpdateHealth(health);
+        internal void UpdateHealth(int currentHealth, int maxHealth) => healthView.UpdateHealth(currentHealth, maxHealth);
     }
 }

@@ -1,6 +1,4 @@
 ﻿using Core;
-using Game.GameCommand;
-using Game.GameCommand.Commands;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,6 +1,7 @@
 ﻿using System;
 using Core;
 using Core.Card;
+using Core.Entities;
 using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
@@ -21,9 +22,9 @@ namespace Cards.SlayTheSpire.Model.Red
         }
 
 
-        public override void Use(IUserController user, ITarget target)
+        public override void Use(AbstractEntity user, AbstractEntity target)
         {
-            CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, 6)));
+            CommandInvoker.ExecuteCommand(new DamageCommand(target as IHealth, new DamageInfo(user, 6)));
         }
 
         public override void Upgrade()

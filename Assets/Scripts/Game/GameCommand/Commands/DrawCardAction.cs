@@ -4,7 +4,7 @@ namespace Game.GameCommand.Commands
 {
     public class DrawCardAction : Command
     {
-        public DrawCardAction(ITarget target, int amount) : base(() => target.Draw(amount))
+        public DrawCardAction(ICardOwner powerOwner, int amount) : base(() => powerOwner.Draw(amount))
         {
         }
     }

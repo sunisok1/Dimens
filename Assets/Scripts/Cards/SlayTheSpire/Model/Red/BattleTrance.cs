@@ -1,5 +1,6 @@
 ﻿using Core;
 using Core.Card;
+using Core.Entities;
 using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
@@ -18,10 +19,10 @@ namespace Cards.SlayTheSpire.Model.Red
             MagicNumber = 3;
         }
 
-        public override void Use(IUserController user, ITarget target)
+        public override void Use(AbstractEntity user, AbstractEntity target)
         {
-            CommandInvoker.ExecuteCommand(new DrawCardAction(target, MagicNumber));
-            CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, target, new NoDrawPower(user)));
+            CommandInvoker.ExecuteCommand(new DrawCardAction(target as ICardOwner, MagicNumber));
+            CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, target as IPowerOwner, new NoDrawPower(user)));
         }
 
         protected override AbstractCard MakeCopy()

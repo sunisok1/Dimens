@@ -1,6 +1,7 @@
 ﻿using System;
 using Core;
 using Core.Card;
+using Core.Entities;
 using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
@@ -29,10 +30,11 @@ namespace Cards.SlayTheSpire.Model.Red
             return new Barricade();
         }
 
-        public override void Use(IUserController user, ITarget target)
+        public override void Use(AbstractEntity user, AbstractEntity target)
         {
-            if (target.HasPower(ID)) return;
-            CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, target, new BarricadePower(target)));
+            if (target is not IPowerOwner powerOwner) return;
+            if (powerOwner.HasPower(typeof(BarricadePower))) return;
+            CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, powerOwner, new BarricadePower(powerOwner)));
         }
     }
 }

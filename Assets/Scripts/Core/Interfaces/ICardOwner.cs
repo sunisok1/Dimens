@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Card;
+using Core.Entities;
 
 namespace Core
 {
@@ -12,6 +13,7 @@ namespace Core
         void AddCard(IEnumerable<CardController> addedCards);
         void Discard(IEnumerable<CardController> discards);
         IEnumerable<CardController> GetCards();
-        void UseCard(CardController card, ITarget target);
+        void UseCard(CardController card, AbstractEntity target);
+        void Draw(int amount);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Core;
 using Core.Card;
+using Core.Entities;
 using Core.Localization;
 using Game.GameCommand;
 using Game.GameCommand.Commands;
@@ -28,9 +29,13 @@ namespace Cards.SlayTheSpire.Model.Red
             return new Anger();
         }
 
-        public override void Use(IUserController user, ITarget target)
+        public override void Use(AbstractEntity user, AbstractEntity target)
         {
-            CommandInvoker.ExecuteCommand(new DamageCommand(target, new DamageInfo(user, Damage)));
+            if (target is IHealth health)
+            {
+                CommandInvoker.ExecuteCommand(new DamageCommand(health, new DamageInfo(user, Damage)));
+            }
+
             CommandInvoker.ExecuteCommand(new MakeTempCardInDiscardAction(MakeStatEquivalentCopy(this), 1));
         }
     }

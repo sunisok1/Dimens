@@ -1,4 +1,6 @@
-﻿namespace Core
+﻿using Core.Entities;
+
+namespace Core
 {
     public class DamageInfo
     {
@@ -9,12 +11,12 @@
             HpLoss
         }
 
-        public IUserController owner;
+        public AbstractEntity owner;
         public string name;
         public DamageType type;
         public int num;
 
-        public DamageInfo(IUserController damageSource, int num, DamageType type = DamageType.Normal)
+        public DamageInfo(AbstractEntity damageSource, int num, DamageType type = DamageType.Normal)
         {
             owner = damageSource;
             this.type = type;

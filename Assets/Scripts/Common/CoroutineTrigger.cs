@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace Common
 {
+    public class CoroutineHelper : MonoBehaviour
+    {
+    }
+
     public class CoroutineTrigger
     {
         private bool triggered;
