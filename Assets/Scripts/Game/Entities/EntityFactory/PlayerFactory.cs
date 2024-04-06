@@ -18,6 +18,7 @@ namespace Game.Entities.EntityFactory
         public PlayerController CreateEntity(string name, Vector3Int position)
         {
             var playerModel = new PlayerModel(name, position, deckFactory.CreateInstance());
+            
             var playerView = ObjectManager.Create<PlayerView>(map.GetContent(), playerModel);
             var playerController = new PlayerController(playerModel, playerView);
             return playerController;

@@ -1080,6 +1080,7 @@ MonoBehaviour:
   cardNameText: {fileID: 1723064849155301959}
   cardTypeText: {fileID: 7451200912754798153}
   cardCostText: {fileID: 2564095252440888385}
+  descriptionText: {fileID: 4038002329700617923}
   bg: {fileID: 6199839781642451819}
   portraits: {fileID: 2881208939339118941}
   frame: {fileID: 5935534503876048291}

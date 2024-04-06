@@ -7,11 +7,12 @@ using UnityEngine;
 
 namespace Game.Entities.Player
 {
-    [Object("Entity/Player")]
-    public partial class PlayerView : EntityView, ISelectable
+    [Object("Entity/PlayerView")]
+    public class PlayerView : EntityView, ISelectable
     {
         [SerializeField] private TextMeshProUGUI nameText;
-        [SerializeField] private TextMeshProUGUI healthText;
+        [SerializeField] private HealthView healthView;
+
 
         public override void OnCreated(params object[] objs)
         {
@@ -28,7 +29,7 @@ namespace Game.Entities.Player
             transform.position = position;
         }
 
-        public override void UpdateName(string name)
+        private void UpdateName(string name)
         {
             nameText.text = name;
         }
@@ -52,9 +53,6 @@ namespace Game.Entities.Player
         public event Action OnSelected;
         public event Action OnDeselected;
 
-        public void UpdateHealth(IHealth health)
-        {
-            healthText.text = $"{health.CurHealth}/{health.MaxHealth}";
-        }
+        internal void UpdateHealth(IHealth health) => healthView.UpdateHealth(health);
     }
 }

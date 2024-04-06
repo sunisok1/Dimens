@@ -15,12 +15,6 @@ namespace Core.Entities
             this.view = view;
         }
 
-        public virtual void ChangeName(string name)
-        {
-            entityModel.Name = name;
-            view.UpdateName(name);
-        }
-
         public virtual void ChangePosition(Vector3Int position)
         {
             entityModel.Position = position;

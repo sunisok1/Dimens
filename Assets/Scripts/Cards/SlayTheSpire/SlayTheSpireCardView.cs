@@ -3,6 +3,7 @@ using Common;
 using Core.Card;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Cards.SlayTheSpire
@@ -16,8 +17,9 @@ namespace Cards.SlayTheSpire
         [SerializeField] private TextMeshProUGUI cardNameText;
         [SerializeField] private TextMeshProUGUI cardTypeText;
         [SerializeField] private TextMeshProUGUI cardCostText;
+        [SerializeField] private TextMeshProUGUI descriptionText;
         [SerializeField] private Image bg;
-        [SerializeField] private Image portraits;
+        [FormerlySerializedAs("portraits")] [SerializeField] private Image portrait;
         [SerializeField] private Image frame;
         [SerializeField] private Image banner;
         [SerializeField] private Image orb;
@@ -71,10 +73,21 @@ namespace Cards.SlayTheSpire
 
             void SetCardInfo(SlayTheSpireCard card)
             {
-                portraits.sprite = Resources.Load<Sprite>($"{portraitsResPath}{card.portrait}");
+                portrait.sprite = Resources.Load<Sprite>($"{portraitsResPath}{card.portrait}");
                 cardNameText.text = card.Name;
                 cardTypeText.text = card.type.ToString();
                 cardCostText.text = card.Cost.ToString();
+                SetDescriptionText(card);
+            }
+
+            void SetDescriptionText(SlayTheSpireCard card)
+            {
+                string rawDescription = card.rawDescription.Replace("NL", "\n");
+                if (card is IDamageCard damageCard)
+                    rawDescription = rawDescription.Replace("!D!", damageCard.Damage.ToString());
+                if (card is IMagicCard magicCard)
+                    rawDescription = rawDescription.Replace("!M!", magicCard.MagicNumber.ToString());
+                descriptionText.text = rawDescription;
             }
         }
     }
