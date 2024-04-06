@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace Game.GameCommand
+namespace Core.Commands
 {
     public static class CommandInvoker
     {

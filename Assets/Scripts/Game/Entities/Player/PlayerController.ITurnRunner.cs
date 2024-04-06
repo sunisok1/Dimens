@@ -3,8 +3,8 @@ using System.Collections;
 using Common;
 using Core;
 using Core.Card;
+using Core.Commands;
 using Core.Entities;
-using Game.GameCommand;
 using Game.GameCommand.Commands;
 using UnityEngine;
 
@@ -12,6 +12,9 @@ namespace Game.Entities.Player
 {
     public partial class Player : ITurnRunner
     {
+        public event Action AtEndOfRound;
+        public event Action AtStartOfTurn;
+
         private readonly CoroutineTrigger endTurnTrigger = new();
         private readonly CoroutineTrigger confirmTrigger = new();
         private readonly CoroutineTrigger cancelTrigger = new();

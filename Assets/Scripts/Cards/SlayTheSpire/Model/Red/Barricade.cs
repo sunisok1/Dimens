@@ -1,11 +1,11 @@
 ﻿using System;
 using Core;
 using Core.Card;
+using Core.Commands;
 using Core.Entities;
 using Core.Localization;
-using Game.GameCommand;
 using Game.GameCommand.Commands;
-using Game.Powers.Model;
+using Game.Powers;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
@@ -14,7 +14,7 @@ namespace Cards.SlayTheSpire.Model.Red
         private const string ID = "Barricade";
         private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
 
-        public Barricade() : base(ID, cardStrings.NAME, "red/power/barricade", 3, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Rare, CardTarget.Self)
+        public Barricade() : base(ID, cardStrings.NAME, "red/power/barricade", 3, cardStrings.DESCRIPTION, CardType.Power, CardColor.Red, CardRarity.Rare, CardTarget.Self)
         {
         }
 
@@ -34,7 +34,7 @@ namespace Cards.SlayTheSpire.Model.Red
         {
             if (target is not IPowerOwner powerOwner) return;
             if (powerOwner.HasPower(typeof(BarricadePower))) return;
-            CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, powerOwner, new BarricadePower(powerOwner)));
+            CommandInvoker.ExecuteCommand(new ApplyPowerAction(powerOwner, new BarricadePower(powerOwner)));
         }
     }
 }

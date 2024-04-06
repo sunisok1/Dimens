@@ -1,9 +1,9 @@
 ﻿using System;
 using Core;
 using Core.Card;
+using Core.Commands;
 using Core.Entities;
 using Core.Localization;
-using Game.GameCommand;
 using Game.GameCommand.Commands;
 
 namespace Cards.SlayTheSpire.Model.Red

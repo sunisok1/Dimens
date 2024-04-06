@@ -47,5 +47,10 @@ namespace Game.Entities.Player
         {
             Energy -= energy;
         }
+
+        public void GainEnergy(int amount)
+        {
+            Energy += amount;
+        }
     }
 }

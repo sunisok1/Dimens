@@ -1,8 +1,8 @@
 ﻿using Core;
 using Core.Card;
+using Core.Commands;
 using Core.Entities;
 using Core.Localization;
-using Game.GameCommand;
 using Game.GameCommand.Commands;
 
 namespace Cards.SlayTheSpire.Model.Red
@@ -13,7 +13,7 @@ namespace Cards.SlayTheSpire.Model.Red
         private static readonly CardStrings cardStrings = CardCrawlGame.languagePack.GetCardStrings(ID);
         public int Block { get; }
 
-        public Armaments() : base(ID, cardStrings.NAME, "red/skill/armaments", 1, cardStrings.DESCRIPTION, CardType.Attack, CardColor.Red, CardRarity.Common, CardTarget.Self)
+        public Armaments() : base(ID, cardStrings.NAME, "red/skill/armaments", 1, cardStrings.DESCRIPTION, CardType.Skill, CardColor.Red, CardRarity.Common, CardTarget.Self)
         {
             Block = 5;
         }

@@ -1,10 +1,10 @@
 ﻿using Core;
 using Core.Card;
+using Core.Commands;
 using Core.Entities;
 using Core.Localization;
-using Game.GameCommand;
 using Game.GameCommand.Commands;
-using Game.Powers.Model;
+using Game.Powers;
 
 namespace Cards.SlayTheSpire.Model.Red
 {
@@ -21,8 +21,10 @@ namespace Cards.SlayTheSpire.Model.Red
 
         public override void Use(AbstractEntity user, AbstractEntity target)
         {
-            CommandInvoker.ExecuteCommand(new DrawCardAction(target as ICardOwner, MagicNumber));
-            CommandInvoker.ExecuteCommand(new ApplyPowerAction(user, target as IPowerOwner, new NoDrawPower(user)));
+            if (target is ICardOwner cardOwner)
+                CommandInvoker.ExecuteCommand(new DrawCardAction(cardOwner, MagicNumber));
+            if (target is IPowerOwner powerOwner)
+                CommandInvoker.ExecuteCommand(new ApplyPowerAction(powerOwner, new NoDrawPower(powerOwner)));
         }
 
         protected override AbstractCard MakeCopy()
